@@ -1,0 +1,53 @@
+<de.ingrid.utils.PlugDescription>
+        <int>19</int>
+        <string>personPhone</string>
+        <string>+49 (0) 60 759003 11</string>
+        <string>personName</string>
+        <string>Joachim</string>
+        <string>ranking</string>
+        <list>
+                <string>off</string>
+        </list>
+        <string>dataType</string>
+        <list>
+                <string>management</string>
+        </list>
+        <string>proxyServiceUrl</string>
+        <string>/kug-group:kug-iplug-management</string>
+        <string>personTitle</string>
+        <string></string>
+        <string>workingDirectory</string>
+        <string>./</string>
+        <string>iPlugClass</string>
+        <string>de.ingrid.iplug.management.ManagementIPlug</string>
+        <string>plugId</string>
+        <string>management-iPlug_20060812</string>
+        <string>dataSourceDescription</string>
+        <string>Management iplug for PortlaU</string>
+        <string>personSureName</string>
+        <string>Müller</string>
+        <string>dataSourceName</string>
+        <string>Management IPlug</string>
+        <string>organisationAbbr</string>
+        <string>ingrid</string>
+        <string>personMail</string>
+        <string>joachim@wemove.com</string>
+        <string>organisation</string>
+        <string>ingrid</string>
+        <string>partner</string>
+    <list>
+          <string>ingrid</string>
+    </list>
+    <string>provider</string>
+    <list>
+          <string>ingrid</string>
+    </list>
+    <string>busUrls</string>
+    <list>
+      <string>/kug-group:kug-ibus</string>
+    </list>
+        <string>motherIbusUrl</string>
+        <string>socket://localhost:11112</string>
+        <string>timeOut</string>
+    <string>10000</string>
+</de.ingrid.utils.PlugDescription>
