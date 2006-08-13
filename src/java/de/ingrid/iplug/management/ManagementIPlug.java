@@ -6,7 +6,6 @@ package de.ingrid.iplug.management;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import de.ingrid.iplug.sns.utils.Topic;
 import de.ingrid.usermanagement.jetspeed.IngridCredentialHandler;
 import de.ingrid.utils.IPlug;
 import de.ingrid.utils.IngridHit;
@@ -88,7 +87,10 @@ public class ManagementIPlug implements IPlug {
             log.debug("incomming query : " + query.toString());
         }
         if (containsManagementDataType(query.getDataTypes())) {
-            int type = query.getInt(MANAGEMENT_REQUEST_TYPE);
+            int type = -1;
+            try {
+                type = Integer.parseInt(getField(query, MANAGEMENT_REQUEST_TYPE));
+            } catch (NumberFormatException e) {}
             final String lang = getQueryLang(query);
             int[] totalSize = new int[1];
             totalSize[0] = 0;
@@ -104,14 +106,14 @@ public class ManagementIPlug implements IPlug {
                     IngridHit hit = new IngridHit(this.fPlugId, 0, 0, 1.0f);
                     
                     // authenticate
-                    String authorized = "0";
+                    String authenticated = "0";
                     if (login != null && passwd != null) {
                         IngridCredentialHandler ch = new IngridCredentialHandler();
                         if (ch.authenticate(login, passwd)) {
-                            authorized = "1";
+                            authenticated = "1";
                         }
                     }
-                    hit.put("authorized", authorized);
+                    hit.put("authenticated", authenticated);
                     
                     // build return value
                     hitsTemp = new IngridHit[1];

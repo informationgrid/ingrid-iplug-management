@@ -17,11 +17,10 @@ public class ManagementIPlugAuthenticateTest extends TestCase {
     public void testSearch() throws Exception {
         
         ManagementIPlug iplug = new ManagementIPlug();
-        IngridQuery q = QueryStringParser.parse("datatype:management login:admin password:admin");
-        q.putInt(ManagementIPlug.MANAGEMENT_REQUEST_TYPE, 0);
+        IngridQuery q = QueryStringParser.parse("datatype:management login:admin password:admin management_request_type:0");
         IngridHits hits = iplug.search(q, 0, 1);
         IngridHit hit = hits.getHits()[0];
-        String result = (String)hit.get("authorized");
+        String result = (String)hit.get("authenticated");
         assertEquals(result, "1");
     }
 
