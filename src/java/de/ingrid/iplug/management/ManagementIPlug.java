@@ -57,6 +57,8 @@ public class ManagementIPlug implements IPlug {
     private static final long serialVersionUID = ManagementIPlug.class.getName().hashCode();
 
     private static final int MANAGEMENT_AUTHENTICATE = 0;
+
+    private static final int MANAGEMENT_DUMMY_DATA = 815;
     
     
     /**
@@ -92,31 +94,92 @@ public class ManagementIPlug implements IPlug {
                 type = Integer.parseInt(getField(query, MANAGEMENT_REQUEST_TYPE));
             } catch (NumberFormatException e) {}
             final String lang = getQueryLang(query);
-            int[] totalSize = new int[1];
-            totalSize[0] = 0;
+            int totalSize = 0;
             try {
                 IngridHit[] hitsTemp = null;
+                String login = null;
+                String passwd = null;
+                IngridHit hit = null;
+                boolean authenticated = false;
                 switch (type) {
                 // authenticate a user
                 case MANAGEMENT_AUTHENTICATE:
-                    
                     // get login and passwd from query
-                    final String login = getField(query, "login");
-                    final String passwd = getField(query, "password");
-                    IngridHit hit = new IngridHit(this.fPlugId, 0, 0, 1.0f);
+                    login = getField(query, "login");
+                    passwd = getField(query, "password");
+                    hit = new IngridHit(this.fPlugId, 0, 0, 1.0f);
                     
                     // authenticate
-                    String authenticated = "0";
+                    authenticated = false;
                     if (login != null && passwd != null) {
                         IngridCredentialHandler ch = new IngridCredentialHandler();
                         if (ch.authenticate(login, passwd)) {
-                            authenticated = "1";
+                            authenticated = true;
                         }
                     }
-                    hit.put("authenticated", authenticated);
+                    hit.putBoolean("authenticated", authenticated);
                     
                     // build return value
                     hitsTemp = new IngridHit[1];
+                    hitsTemp[0] = hit;
+                    break;
+                case MANAGEMENT_DUMMY_DATA:
+                    // get login and passwd from query
+                    login = getField(query, "login");
+                    passwd = getField(query, "password");
+
+                    hit = new IngridHit(this.fPlugId, 0, 0, 1.0f);
+                    if (login.equalsIgnoreCase("admin_partner") && passwd.equals("admin")) {
+                        // build return value
+                        hitsTemp = new IngridHit[1];
+                        // hit authenticated
+                        hit.putBoolean("authenticated", true);
+                        // hits role
+                        hit.put("role", new String("admin_partner"));
+                        // hits partners
+                        hit.setArray("partner", new String[] {"he", "st"});
+                        // hits providers
+                        
+                        hitsTemp[0] = hit;
+                    } else if (login.equalsIgnoreCase("admin_provider") && passwd.equals("admin")) {
+                        // build return value
+                        hitsTemp = new IngridHit[1];
+                        // hit authenticated
+                        hit.putBoolean("authenticated", true);
+                        // hits role
+                        hit.put("role", new String("admin_provider"));
+                        // hits partners
+                        
+                        // hits providers
+                        hit.setArray("provider", new String[] {"bu_bmu", "bu_uba", "he_hmulv"});
+                        hitsTemp[0] = hit;
+                    } else if (login.equalsIgnoreCase("admin_themes_measure") && passwd.equals("admin")) {
+                        // build return value
+                        hitsTemp = new IngridHit[2];
+                        // hit authenticated
+                        hit.putBoolean("authenticated", true);
+                        // hits role
+                        hit.put("role", new String("admin_themes"));
+                        // hits partners
+                        
+                        // hits providers
+                        hit.setArray("provider", new String[] {"bu_bmu", "bu_uba", "he_hmulv"});
+                        hitsTemp[0] = hit;
+                        
+                        
+                        hit = new IngridHit(this.fPlugId, 0, 0, 1.0f);                        
+                        // hit authenticated
+                        hit.putBoolean("authenticated", true);
+                        // hits role
+                        hit.put("role", new String("admin_measure"));
+                        // hits partners
+                        
+                        // hits providers
+                        hit.setArray("provider", new String[] {"bu_bmu", "bu_uba", "he_hmulv"});
+                    } else {
+                        // hit authenticated
+                        hit.putBoolean("authenticated", false);
+                    }
                     hitsTemp[0] = hit;
                     break;
                 default:
@@ -133,14 +196,15 @@ public class ManagementIPlug implements IPlug {
                 int max = Math.min((hits.length - start), length);
                 IngridHit[] finalHits = new IngridHit[max];
                 System.arraycopy(hits, start, finalHits, 0, max);
+                totalSize = max;
                 if (log.isDebugEnabled()) {
-                    log.debug("hits: " + totalSize[0]);
+                    log.debug("hits: " + totalSize);
                 }
 
-                if ((0 == totalSize[0]) && (hits.length > 0)) {
-                    totalSize[0] = hits.length;
+                if ((0 == totalSize) && (hits.length > 0)) {
+                    totalSize = hits.length;
                 }
-                return new IngridHits(this.fPlugId, totalSize[0], finalHits, false);
+                return new IngridHits(this.fPlugId, totalSize, finalHits, false);
             } catch (Exception e) {
                 log.error(e.getMessage(), e);
             }
