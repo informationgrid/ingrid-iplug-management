@@ -20,18 +20,30 @@ public class ManagementIPlugAuthenticateTest extends TestCase {
         
         ManagementIPlug iplug = new ManagementIPlug();
         MessageDigestCredentialPasswordEncoder penc = new MessageDigestCredentialPasswordEncoder();
+        
+        // test encrypted digest login
         String digest = penc.encode("admin", "admin");
         IngridQuery q = QueryStringParser.parse("datatype:management login:admin digest:"+ digest + " management_request_type:0");
         IngridHits hits = iplug.search(q, 0, 1);
         IngridHit hit = hits.getHits()[0];
         boolean result = hit.getBoolean("authenticated");
         assertEquals(result, true);
+        
+        // test wrong digest
         digest = penc.encode("admin", "wrong");
         q = QueryStringParser.parse("datatype:management login:admin digest:"+ digest + " management_request_type:0");
         hits = iplug.search(q, 0, 1);
         hit = hits.getHits()[0];
         result = hit.getBoolean("authenticated");
         assertEquals(result, false);
+
+        // test clear text digest
+        q = QueryStringParser.parse("datatype:management login:admin digest:admin management_request_type:0");
+        hits = iplug.search(q, 0, 1);
+        hit = hits.getHits()[0];
+        result = hit.getBoolean("authenticated");
+        assertEquals(result, true);
+        
     }
 
     
@@ -92,6 +104,23 @@ public class ManagementIPlugAuthenticateTest extends TestCase {
             assertEquals(provider[i], (String)hit.getArray("provider")[i]);
         }
 
+        digest = penc.encode("admin_index", "admin");
+        q = QueryStringParser.parse("datatype:management login:admin_index digest:"+ digest + " management_request_type:815");
+        hits = iplug.search(q, 0, 100);
+        assertEquals(hits.length(), 1L);
+        hit = hits.getHits()[0];
+        assertEquals(hit.getBoolean("authenticated"), true);
+        assertEquals((String)hit.get("role"), "admin_index");
+        partner = new String[] {"he", "st"};
+        for (int i=0; i<partner.length; i++ ) {
+            assertEquals(partner[i], (String)hit.getArray("partner")[i]);
+        }
+        provider = new String[] {"bu_bmu", "bu_uba"};
+        for (int i=0; i<provider.length; i++ ) {
+            assertEquals(provider[i], (String)hit.getArray("provider")[i]);
+        }
+
+        
         
     }
     

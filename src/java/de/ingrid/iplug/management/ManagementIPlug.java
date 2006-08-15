@@ -128,10 +128,18 @@ public class ManagementIPlug implements IPlug {
                             PasswordCredential credential =  (PasswordCredential)it.next();
                             if ( credential != null && credential.isEnabled() && !credential.isExpired()) {
                                 String password = new String(credential.getPassword());
+                                // check for PortalPassword == digest
                                 if (password.equals(digest)) {
                                     authenticated = true;
+                                    break;
+                                // check for encrypted PortalPassword == digest
                                 } else if (cpe != null && cpe.encode(login, password).equals(digest)) {
                                     authenticated = true;
+                                    break;
+                                // check for PortalPassword == encrypted digest
+                                } else if (cpe != null && password.equals(cpe.encode(login, digest))) {
+                                    authenticated = true;
+                                    break;
                                 }
                             }
                         }
@@ -201,6 +209,18 @@ public class ManagementIPlug implements IPlug {
                         hit.setArray("provider", new String[] {"bu_bmu", "bu_uba", "he_hmulv"});
                         
                         hitsTemp[1] = hit;
+                    } else if (login.equalsIgnoreCase("admin_index") && digest.equals(cpe.encode("admin_index", "admin"))) {
+                        // build return value
+                        hitsTemp = new IngridHit[1];
+                        // hit authenticated
+                        hit.putBoolean("authenticated", true);
+                        // hits role
+                        hit.put("role", new String("admin_index"));
+                        // hits partners
+                        hit.setArray("partner", new String[] {"he", "st"});
+                        // hits providers
+                        hit.setArray("provider", new String[] {"bu_bmu", "bu_uba"});
+                        hitsTemp[0] = hit;
                     } else {
                         // hit authenticated
                         hit.putBoolean("authenticated", false);
