@@ -3,8 +3,15 @@
  */
 package de.ingrid.iplug.management;
 
+import java.util.Iterator;
+import java.util.Set;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.jetspeed.security.PasswordCredential;
+import org.apache.jetspeed.security.spi.CredentialPasswordEncoder;
+import org.apache.jetspeed.security.spi.PasswordCredentialProvider;
+import org.apache.jetspeed.security.spi.impl.MessageDigestCredentialPasswordEncoder;
 
 import de.ingrid.usermanagement.jetspeed.IngridCredentialHandler;
 import de.ingrid.utils.IPlug;
@@ -98,7 +105,7 @@ public class ManagementIPlug implements IPlug {
             try {
                 IngridHit[] hitsTemp = null;
                 String login = null;
-                String passwd = null;
+                String digest = null;
                 IngridHit hit = null;
                 boolean authenticated = false;
                 switch (type) {
@@ -106,15 +113,27 @@ public class ManagementIPlug implements IPlug {
                 case MANAGEMENT_AUTHENTICATE:
                     // get login and passwd from query
                     login = getField(query, "login");
-                    passwd = getField(query, "password");
+                    digest = getField(query, "digest");
                     hit = new IngridHit(this.fPlugId, 0, 0, 1.0f);
                     
                     // authenticate
                     authenticated = false;
-                    if (login != null && passwd != null) {
+                    if (login != null && digest != null) {
                         IngridCredentialHandler ch = new IngridCredentialHandler();
-                        if (ch.authenticate(login, passwd)) {
-                            authenticated = true;
+                        PasswordCredentialProvider pc = ch.getPCProvider();
+                        CredentialPasswordEncoder cpe = pc.getEncoder();
+                        Set credentials = ch.getPrivateCredentials(login);
+                        Iterator it = credentials.iterator();
+                        while (it.hasNext()) {
+                            PasswordCredential credential =  (PasswordCredential)it.next();
+                            if ( credential != null && credential.isEnabled() && !credential.isExpired()) {
+                                String password = new String(credential.getPassword());
+                                if (password.equals(digest)) {
+                                    authenticated = true;
+                                } else if (cpe != null && cpe.encode(login, password).equals(digest)) {
+                                    authenticated = true;
+                                }
+                            }
                         }
                     }
                     hit.putBoolean("authenticated", authenticated);
@@ -123,13 +142,17 @@ public class ManagementIPlug implements IPlug {
                     hitsTemp = new IngridHit[1];
                     hitsTemp[0] = hit;
                     break;
+                // return some dummy data 
                 case MANAGEMENT_DUMMY_DATA:
                     // get login and passwd from query
                     login = getField(query, "login");
-                    passwd = getField(query, "password");
+                    digest = getField(query, "digest");
+                    IngridCredentialHandler ch = new IngridCredentialHandler();
+                    PasswordCredentialProvider pc = ch.getPCProvider();
+                    CredentialPasswordEncoder cpe = pc.getEncoder();
 
                     hit = new IngridHit(this.fPlugId, 0, 0, 1.0f);
-                    if (login.equalsIgnoreCase("admin_partner") && passwd.equals("admin")) {
+                    if (login.equalsIgnoreCase("admin_partner") && digest.equals(cpe.encode("admin_partner", "admin"))) {
                         // build return value
                         hitsTemp = new IngridHit[1];
                         // hit authenticated
@@ -141,7 +164,7 @@ public class ManagementIPlug implements IPlug {
                         // hits providers
                         
                         hitsTemp[0] = hit;
-                    } else if (login.equalsIgnoreCase("admin_provider") && passwd.equals("admin")) {
+                    } else if (login.equalsIgnoreCase("admin_provider") && digest.equals(cpe.encode("admin_provider", "admin"))) {
                         // build return value
                         hitsTemp = new IngridHit[1];
                         // hit authenticated
@@ -153,7 +176,7 @@ public class ManagementIPlug implements IPlug {
                         // hits providers
                         hit.setArray("provider", new String[] {"bu_bmu", "bu_uba", "he_hmulv"});
                         hitsTemp[0] = hit;
-                    } else if (login.equalsIgnoreCase("admin_themes_measure") && passwd.equals("admin")) {
+                    } else if (login.equalsIgnoreCase("admin_themes_measure") && digest.equals(cpe.encode("admin_themes_measure", "admin"))) {
                         // build return value
                         hitsTemp = new IngridHit[2];
                         // hit authenticated
@@ -176,11 +199,12 @@ public class ManagementIPlug implements IPlug {
                         
                         // hits providers
                         hit.setArray("provider", new String[] {"bu_bmu", "bu_uba", "he_hmulv"});
+                        
+                        hitsTemp[1] = hit;
                     } else {
                         // hit authenticated
                         hit.putBoolean("authenticated", false);
                     }
-                    hitsTemp[0] = hit;
                     break;
                 default:
                     log.error("Unknown management request type.");
