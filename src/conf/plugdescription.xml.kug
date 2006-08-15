@@ -1,5 +1,5 @@
 <de.ingrid.utils.PlugDescription>
-        <int>19</int>
+        <int>21</int>
         <string>personPhone</string>
         <string>+49 (0) 60 759003 11</string>
         <string>personName</string>
@@ -50,4 +50,10 @@
         <string>socket://localhost:11112</string>
         <string>timeOut</string>
     <string>10000</string>
+		<string>fields</string>
+	    <list>
+	      <string>login</string>
+	      <string>digest</string>
+	      <string>management_request_type</string>
+	    </list>
 </de.ingrid.utils.PlugDescription>

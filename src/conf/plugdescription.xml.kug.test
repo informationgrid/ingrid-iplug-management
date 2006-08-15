@@ -53,7 +53,7 @@
 		<string>fields</string>
 	    <list>
 	      <string>login</string>
-	      <string>password</string>
+	      <string>digest</string>
 	      <string>management_request_type</string>
 	    </list>
 </de.ingrid.utils.PlugDescription>
