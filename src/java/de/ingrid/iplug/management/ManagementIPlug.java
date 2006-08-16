@@ -252,7 +252,7 @@ public class ManagementIPlug implements IPlug {
                         // hit authenticated
                         hit.putBoolean("authenticated", true);
                         // hits role
-                        hit.put("role", new String("admin_partner"));
+                        hit.put("permission", new String("portal.admin.provider"));
                         // hits partners
                         hit.setArray("partner", new String[] {"he", "st"});
                         // hits providers
@@ -264,7 +264,7 @@ public class ManagementIPlug implements IPlug {
                         // hit authenticated
                         hit.putBoolean("authenticated", true);
                         // hits role
-                        hit.put("role", new String("admin_provider"));
+                        hit.put("permission", new String("portal.admin.iplug"));
                         // hits partners
                         
                         // hits providers
@@ -276,7 +276,7 @@ public class ManagementIPlug implements IPlug {
                         // hit authenticated
                         hit.putBoolean("authenticated", true);
                         // hits role
-                        hit.put("role", new String("admin_themes"));
+                        hit.put("permission", new String("portal.admin.catalog.topics"));
                         // hits partners
                         
                         // hits providers
@@ -288,7 +288,7 @@ public class ManagementIPlug implements IPlug {
                         // hit authenticated
                         hit.putBoolean("authenticated", true);
                         // hits role
-                        hit.put("role", new String("admin_measure"));
+                        hit.put("permission", new String("portal.admin.catalog.data"));
                         // hits partners
                         
                         // hits providers
@@ -301,7 +301,7 @@ public class ManagementIPlug implements IPlug {
                         // hit authenticated
                         hit.putBoolean("authenticated", true);
                         // hits role
-                        hit.put("role", new String("admin_index"));
+                        hit.put("permission", new String("portal.admin.index"));
                         // hits partners
                         hit.setArray("partner", new String[] {"he", "st"});
                         // hits providers

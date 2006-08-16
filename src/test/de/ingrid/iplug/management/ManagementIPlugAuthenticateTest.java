@@ -30,7 +30,7 @@ public class ManagementIPlugAuthenticateTest extends TestCase {
         assertEquals(hits.length(), 1L);
         IngridHit hit = hits.getHits()[0];
         assertEquals(hit.getBoolean("authenticated"), true);
-        assertEquals((String)hit.get("role"), "admin_partner");
+        assertEquals((String)hit.get("permission"), "portal.admin.provider");
         String[] partner = new String[] {"he", "st"};
         for (int i=0; i<partner.length; i++ ) {
             assertEquals(partner[i], (String)hit.getArray("partner")[i]);
@@ -43,7 +43,7 @@ public class ManagementIPlugAuthenticateTest extends TestCase {
         assertEquals(hits.length(), 1L);
         hit = hits.getHits()[0];
         assertEquals(hit.getBoolean("authenticated"), true);
-        assertEquals((String)hit.get("role"), "admin_provider");
+        assertEquals((String)hit.get("permission"), "portal.admin.iplug");
         assertNull(hit.getArray("partner"));
         String[] provider = new String[] {"bu_bmu", "bu_uba", "he_hmulv"};
         for (int i=0; i<provider.length; i++ ) {
@@ -56,7 +56,7 @@ public class ManagementIPlugAuthenticateTest extends TestCase {
         assertEquals(hits.length(), 2L);
         hit = hits.getHits()[0];
         assertEquals(hit.getBoolean("authenticated"), true);
-        assertEquals((String)hit.get("role"), "admin_themes");
+        assertEquals((String)hit.get("permission"), "portal.admin.catalog.topics");
         assertNull(hit.getArray("partner"));
         provider = new String[] {"bu_bmu", "bu_uba", "he_hmulv"};
         for (int i=0; i<provider.length; i++ ) {
@@ -64,7 +64,7 @@ public class ManagementIPlugAuthenticateTest extends TestCase {
         }
         hit = hits.getHits()[1];
         assertEquals(hit.getBoolean("authenticated"), true);
-        assertEquals((String)hit.get("role"), "admin_measure");
+        assertEquals((String)hit.get("permission"), "portal.admin.catalog.data");
         assertNull(hit.getArray("partner"));
         provider = new String[] {"bu_bmu", "bu_uba", "he_hmulv"};
         for (int i=0; i<provider.length; i++ ) {
@@ -77,7 +77,7 @@ public class ManagementIPlugAuthenticateTest extends TestCase {
         assertEquals(hits.length(), 1L);
         hit = hits.getHits()[0];
         assertEquals(hit.getBoolean("authenticated"), true);
-        assertEquals((String)hit.get("role"), "admin_index");
+        assertEquals((String)hit.get("permission"), "portal.admin.index");
         partner = new String[] {"he", "st"};
         for (int i=0; i<partner.length; i++ ) {
             assertEquals(partner[i], (String)hit.getArray("partner")[i]);
