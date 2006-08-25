@@ -23,6 +23,7 @@ limitations under the License.
 <!ENTITY database SYSTEM "repository_database.xml">
 <!ENTITY internal SYSTEM "repository_internal.xml">
 <!ENTITY security SYSTEM "security_repository.xml">
+<!ENTITY ingrid_portal SYSTEM "ingrid_portal_repository.xml">
 ]>
 
 <descriptor-repository version="1.0"
@@ -36,5 +37,7 @@ limitations under the License.
     &internal;
     
     &security;
+
+    &ingrid_portal;
 
 </descriptor-repository>

@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 
 import de.ingrid.iplug.management.usecase.ManagementAuthenticationUseCase;
 import de.ingrid.iplug.management.usecase.ManagementDummyAuthenticationUseCase;
+import de.ingrid.iplug.management.usecase.ManagementGetPartnerUseCase;
 import de.ingrid.iplug.management.usecase.ManagementUseCase;
 import de.ingrid.iplug.management.util.ManagementUtils;
 import de.ingrid.utils.IPlug;
@@ -58,6 +59,8 @@ public class ManagementIPlug implements IPlug {
     private static final long serialVersionUID = ManagementIPlug.class.getName().hashCode();
 
     private static final int MANAGEMENT_AUTHENTICATE = 0;
+
+    private static final int MANAGEMENT_GET_PARTNERS = 1;
 
     private static final int MANAGEMENT_DUMMY_DATA = 815;
 
@@ -113,6 +116,14 @@ public class ManagementIPlug implements IPlug {
                 case MANAGEMENT_DUMMY_DATA:
 
                     uc = new ManagementDummyAuthenticationUseCase();
+                    // execute use case
+                    hitsTemp = uc.execute(query, start, length, this.fPlugId);
+
+                    break;
+                // return some dummy data
+                case MANAGEMENT_GET_PARTNERS:
+
+                    uc = new ManagementGetPartnerUseCase();
                     // execute use case
                     hitsTemp = uc.execute(query, start, length, this.fPlugId);
 
