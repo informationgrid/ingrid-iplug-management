@@ -8,9 +8,7 @@ import java.security.Permissions;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
@@ -97,63 +95,49 @@ public class ManagementAuthenticationUseCase implements ManagementUseCase {
                 Permissions principalPermissions = pm.getPermissions(principal);
                 // accumulate the partners and providers for the permissions
                 Enumeration e = principalPermissions.elements();
-                HashMap permissions = new HashMap();
+                ArrayList permissions = new ArrayList();
+                ArrayList permissionsPartners = new ArrayList();
+                ArrayList permissionsProviders = new ArrayList();
+                
                 while (e.hasMoreElements()) {
                     Permission permission = (Permission) e.nextElement();
                     if (permission instanceof IngridPartnerPermission) {
                         IngridPartnerPermission partnerPermission = (IngridPartnerPermission) permission;
-                        // accumulate partner for this permission
-                        if (!permissions.containsKey(partnerPermission.getName())) {
-                            permissions.put(partnerPermission.getName(), new HashMap());
-                        }
-                        HashMap permissionHash = (HashMap) permissions.get(partnerPermission.getName());
-                        if (!permissionHash.containsKey("partner")) {
-                            permissionHash.put("partner", new ArrayList());
-                        }
-                        ArrayList dst = ((ArrayList) permissionHash.get("partner"));
-                        ArrayList src = partnerPermission.getPartners();
-                        for (int i = 0; i < src.size(); i++) {
-                            if (!dst.contains(src.get(i))) {
-                                dst.add(src.get(i));
+                        // accumulate partners
+                        ArrayList partners = partnerPermission.getPartners();
+                        for (int i = 0; i < partners.size(); i++) {
+                            if (!permissionsPartners.contains(partners.get(i))) {
+                                permissionsPartners.add(partners.get(i));
                             }
                         }
-                    } else if (permission instanceof IngridProviderPermission) {
+                    } else if (permission instanceof IngridPartnerPermission) {
                         IngridProviderPermission providerPermission = (IngridProviderPermission) permission;
-                        // accumulate partner for this permission
-                        if (!permissions.containsKey(providerPermission.getName())) {
-                            permissions.put(providerPermission.getName(), new HashMap());
-                        }
-                        HashMap permissionHash = (HashMap) permissions.get(providerPermission.getName());
-                        if (!permissionHash.containsKey("provider")) {
-                            permissionHash.put("provider", new ArrayList());
-                        }
-                        ArrayList dst = ((ArrayList) permissionHash.get("provider"));
-                        ArrayList src = providerPermission.getProviders();
-                        for (int i = 0; i < src.size(); i++) {
-                            if (!dst.contains(src.get(i))) {
-                                dst.add(src.get(i));
+                        // accumulate providers
+                        ArrayList providers = providerPermission.getProviders();
+                        for (int i = 0; i < providers.size(); i++) {
+                            if (!permissionsProviders.contains(providers.get(i))) {
+                                permissionsProviders.add(providers.get(i));
                             }
                         }
                     } else if (permission instanceof IngridPortalPermission) {
-                        if (!permissions.containsKey(permission.getName())) {
-                            permissions.put(permission.getName(), new HashMap());
+                        IngridPortalPermission portalPermission = (IngridPortalPermission) permission;
+                        if (!permissions.contains(portalPermission.getName())) {
+                            permissions.add(portalPermission.getName());
                         }
                     }
                 }
                 // add accumulated permissions to the result
-                Iterator it = permissions.entrySet().iterator();
+                Iterator it = permissions.iterator();
                 while (it.hasNext()) {
-                    Map.Entry entry = (Map.Entry) it.next();
-                    String permissionName = (String) entry.getKey();
+                    String permissionName = (String) it.next();
                     hit = new IngridHit(plugId, 0, 0, 1.0f);
                     hit.putBoolean("authenticated", authenticated);
                     hit.put("permission", permissionName);
-                    HashMap permissionHash = (HashMap) permissions.get(permissionName);
-                    if (permissionHash.containsKey("partner")) {
-                        hit.put("partner", (String[]) ((ArrayList) permissionHash.get("partner")).toArray());
+                    if (!permissionsPartners.isEmpty()) {
+                        hit.put("partner", (String[]) permissionsPartners.toArray());
                     }
-                    if (permissionHash.containsKey("provider")) {
-                        hit.put("provider", (String[]) ((ArrayList) permissionHash.get("provider")).toArray());
+                    if (!permissionsProviders.isEmpty()) {
+                        hit.put("provider", (String[]) permissionsProviders.toArray());
                     }
                     hits.add(hit);
                 }

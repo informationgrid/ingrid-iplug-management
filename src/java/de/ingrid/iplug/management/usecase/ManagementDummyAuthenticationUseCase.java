@@ -51,8 +51,8 @@ public class ManagementDummyAuthenticationUseCase implements ManagementUseCase {
                 result = new IngridHit[1];
                 // hit authenticated
                 hit.putBoolean("authenticated", true);
-                // hits role
-                hit.put("permission", new String("portal.admin.provider"));
+                // hits permission
+                hit.put("permission", new String("admin.portal.partner"));
                 // hits partners
                 hit.setArray("partner", new String[] { "he", "st" });
                 // hits providers
@@ -64,9 +64,9 @@ public class ManagementDummyAuthenticationUseCase implements ManagementUseCase {
                 // hit authenticated
                 hit.putBoolean("authenticated", true);
                 // hits role
-                hit.put("permission", new String("portal.admin.iplug"));
+                hit.put("permission", new String("admin.portal.partner.provider.index"));
                 // hits partners
-
+                hit.setArray("partner", new String[] { "bund" });
                 // hits providers
                 hit.setArray("provider", new String[] { "bu_bmu", "bu_uba", "he_hmulv" });
                 result[0] = hit;
@@ -77,9 +77,9 @@ public class ManagementDummyAuthenticationUseCase implements ManagementUseCase {
                 // hit authenticated
                 hit.putBoolean("authenticated", true);
                 // hits role
-                hit.put("permission", new String("portal.admin.catalog.topics"));
+                hit.put("permission", new String("admin.portal.partner.provider.catalog"));
                 // hits partners
-
+                hit.setArray("partner", new String[] { "bund" });
                 // hits providers
                 hit.setArray("provider", new String[] { "bu_bmu", "bu_uba", "he_hmulv" });
                 result[0] = hit;
@@ -88,9 +88,9 @@ public class ManagementDummyAuthenticationUseCase implements ManagementUseCase {
                 // hit authenticated
                 hit.putBoolean("authenticated", true);
                 // hits role
-                hit.put("permission", new String("portal.admin.catalog.data"));
+                hit.put("permission", new String("admin.portal.partner.provider.index"));
                 // hits partners
-
+                hit.setArray("partner", new String[] { "bund" });
                 // hits providers
                 hit.setArray("provider", new String[] { "bu_bmu", "bu_uba", "he_hmulv" });
 
@@ -101,9 +101,9 @@ public class ManagementDummyAuthenticationUseCase implements ManagementUseCase {
                 // hit authenticated
                 hit.putBoolean("authenticated", true);
                 // hits role
-                hit.put("permission", new String("portal.admin.index"));
+                hit.put("permission", new String("admin.portal.partner.provider.index"));
                 // hits partners
-                hit.setArray("partner", new String[] { "he", "st" });
+                hit.setArray("partner", new String[] { "bund" });
                 // hits providers
                 hit.setArray("provider", new String[] { "bu_bmu", "bu_uba" });
                 result[0] = hit;
