@@ -103,27 +103,13 @@ public class ManagementAuthenticationUseCase implements ManagementUseCase {
                     Permission permission = (Permission) e.nextElement();
                     if (permission instanceof IngridPartnerPermission) {
                         IngridPartnerPermission partnerPermission = (IngridPartnerPermission) permission;
-                        // accumulate partners
-                        ArrayList partners = partnerPermission.getPartners();
-                        for (int i = 0; i < partners.size(); i++) {
-                            if (!permissionsPartners.contains(partners.get(i))) {
-                                permissionsPartners.add(partners.get(i));
-                            }
-                        }
+                        permissionsPartners.add(partnerPermission.getPartner());
                     } else if (permission instanceof IngridPartnerPermission) {
                         IngridProviderPermission providerPermission = (IngridProviderPermission) permission;
-                        // accumulate providers
-                        ArrayList providers = providerPermission.getProviders();
-                        for (int i = 0; i < providers.size(); i++) {
-                            if (!permissionsProviders.contains(providers.get(i))) {
-                                permissionsProviders.add(providers.get(i));
-                            }
-                        }
+                        permissionsProviders.add(providerPermission.getProvider());
                     } else if (permission instanceof IngridPortalPermission) {
                         IngridPortalPermission portalPermission = (IngridPortalPermission) permission;
-                        if (!permissions.contains(portalPermission.getName())) {
-                            permissions.add(portalPermission.getName());
-                        }
+                        permissions.add(portalPermission.getName());
                     }
                 }
                 // add accumulated permissions to the result
