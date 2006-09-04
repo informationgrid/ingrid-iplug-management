@@ -98,13 +98,13 @@ public class ManagementAuthenticationUseCase implements ManagementUseCase {
                 ArrayList permissions = new ArrayList();
                 ArrayList permissionsPartners = new ArrayList();
                 ArrayList permissionsProviders = new ArrayList();
-                
+
                 while (e.hasMoreElements()) {
                     Permission permission = (Permission) e.nextElement();
                     if (permission instanceof IngridPartnerPermission) {
                         IngridPartnerPermission partnerPermission = (IngridPartnerPermission) permission;
                         permissionsPartners.add(partnerPermission.getPartner());
-                    } else if (permission instanceof IngridPartnerPermission) {
+                    } else if (permission instanceof IngridProviderPermission) {
                         IngridProviderPermission providerPermission = (IngridProviderPermission) permission;
                         permissionsProviders.add(providerPermission.getProvider());
                     } else if (permission instanceof IngridPortalPermission) {
@@ -120,10 +120,10 @@ public class ManagementAuthenticationUseCase implements ManagementUseCase {
                     hit.putBoolean("authenticated", authenticated);
                     hit.put("permission", permissionName);
                     if (!permissionsPartners.isEmpty()) {
-                        hit.put("partner", (String[]) permissionsPartners.toArray());
+                        hit.put("partner", (String[]) permissionsPartners.toArray(new String[] {}));
                     }
                     if (!permissionsProviders.isEmpty()) {
-                        hit.put("provider", (String[]) permissionsProviders.toArray());
+                        hit.put("provider", (String[]) permissionsProviders.toArray(new String[] {}));
                     }
                     hits.add(hit);
                 }
