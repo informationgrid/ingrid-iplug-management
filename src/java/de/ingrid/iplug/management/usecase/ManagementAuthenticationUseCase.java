@@ -14,6 +14,7 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.jetspeed.security.PasswordCredential;
+import org.apache.jetspeed.security.RoleManager;
 import org.apache.jetspeed.security.spi.CredentialPasswordEncoder;
 import org.apache.jetspeed.security.spi.PasswordCredentialProvider;
 
@@ -21,8 +22,10 @@ import de.ingrid.iplug.management.util.ManagementUtils;
 import de.ingrid.portal.security.permission.IngridPartnerPermission;
 import de.ingrid.portal.security.permission.IngridPortalPermission;
 import de.ingrid.portal.security.permission.IngridProviderPermission;
+import de.ingrid.portal.security.util.SecurityHelper;
 import de.ingrid.usermanagement.jetspeed.IngridCredentialHandler;
 import de.ingrid.usermanagement.jetspeed.IngridPermissionManager;
+import de.ingrid.usermanagement.jetspeed.IngridRoleManager;
 import de.ingrid.usermanagement.jetspeed.IngridUserSecurityHandler;
 import de.ingrid.utils.IngridHit;
 import de.ingrid.utils.query.IngridQuery;
@@ -90,9 +93,10 @@ public class ManagementAuthenticationUseCase implements ManagementUseCase {
             if (authenticated) {
                 // get permissions for the user
                 IngridPermissionManager pm = new IngridPermissionManager();
+                RoleManager rm = new IngridRoleManager();
                 IngridUserSecurityHandler sh = new IngridUserSecurityHandler();
                 Principal principal = sh.getUserPrincipal(login);
-                Permissions principalPermissions = pm.getPermissions(principal);
+                Permissions principalPermissions = SecurityHelper.getMergedPermissions(principal, pm, rm);
                 // accumulate the partners and providers for the permissions
                 Enumeration e = principalPermissions.elements();
                 ArrayList permissions = new ArrayList();

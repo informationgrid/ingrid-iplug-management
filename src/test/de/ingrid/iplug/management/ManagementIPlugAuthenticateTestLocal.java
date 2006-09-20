@@ -67,6 +67,15 @@ public class ManagementIPlugAuthenticateTestLocal extends TestCase {
             assertEquals(hit.getArray("partner")[i], testArray[i]);
         }
 
+        // test portal admin returns
+        q = QueryStringParser
+                .parse("datatype:management login:adminportal digest:adminportal management_request_type:0");
+        hits = iplug.search(q, 0, 100);
+        hit = hits.getHits()[0];
+        assertEquals(hit.getBoolean("authenticated"), true);
+        assertEquals((String) hit.get("permission"), "admin.portal");
+        
+        
         // test provider returns
         q = QueryStringParser
                 .parse("datatype:management login:adminprovider digest:adminprovider management_request_type:0");
