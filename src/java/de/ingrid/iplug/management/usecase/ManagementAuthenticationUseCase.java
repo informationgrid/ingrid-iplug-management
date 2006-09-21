@@ -14,7 +14,6 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.jetspeed.security.PasswordCredential;
-import org.apache.jetspeed.security.RoleManager;
 import org.apache.jetspeed.security.spi.CredentialPasswordEncoder;
 import org.apache.jetspeed.security.spi.PasswordCredentialProvider;
 
@@ -93,7 +92,7 @@ public class ManagementAuthenticationUseCase implements ManagementUseCase {
             if (authenticated) {
                 // get permissions for the user
                 IngridPermissionManager pm = new IngridPermissionManager();
-                RoleManager rm = new IngridRoleManager();
+                IngridRoleManager rm = new IngridRoleManager();
                 IngridUserSecurityHandler sh = new IngridUserSecurityHandler();
                 Principal principal = sh.getUserPrincipal(login);
                 Permissions principalPermissions = SecurityHelper.getMergedPermissions(principal, pm, rm);
@@ -131,6 +130,9 @@ public class ManagementAuthenticationUseCase implements ManagementUseCase {
                     }
                     hits.add(hit);
                 }
+                pm.destroy();
+                rm.destroy();
+                sh.destroy();
             }
             // make sure we have at least one valid hit
             if (hits.size() == 0) {

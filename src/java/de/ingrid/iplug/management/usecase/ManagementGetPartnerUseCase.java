@@ -94,6 +94,9 @@ public class ManagementGetPartnerUseCase implements ManagementUseCase {
         hit.put("partner", partnerList);
         result = new IngridHit[1];
         result[0] = hit;
+        if (broker != null) {
+            broker.close();
+        }
 
         return result;
     }
