@@ -86,6 +86,7 @@ public class ManagementAuthenticationUseCase implements ManagementUseCase {
                         }
                     }
                 }
+                ch.destroy();
             }
 
             ArrayList hits = new ArrayList();

@@ -74,8 +74,7 @@ public class ManagementIPlugAuthenticateTestLocal extends TestCase {
         hit = hits.getHits()[0];
         assertEquals(hit.getBoolean("authenticated"), true);
         assertEquals((String) hit.get("permission"), "admin.portal");
-        
-        
+
         // test provider returns
         q = QueryStringParser
                 .parse("datatype:management login:adminprovider digest:adminprovider management_request_type:0");
@@ -103,6 +102,46 @@ public class ManagementIPlugAuthenticateTestLocal extends TestCase {
         for (int i = 0; i < hit.getArray("provider").length; i++) {
             assertEquals(hit.getArray("provider")[i], testArray[i]);
         }
+
+        // stress test
+        for (int i = 0; i < 500; i++) {
+            q = QueryStringParser
+                    .parse("datatype:management login:adminportal digest:adminportal management_request_type:0");
+            System.out.println(i);
+            hits = iplug.search(q, 0, 100);
+            hit = hits.getHits()[0];
+            assertEquals(hit.getBoolean("authenticated"), true);
+            assertEquals((String) hit.get("permission"), "admin.portal");
+
+            q = QueryStringParser
+                    .parse("datatype:management login:adminprovider digest:adminprovider management_request_type:0");
+            hits = iplug.search(q, 0, 100);
+            hit = hits.getHits()[0];
+            assertEquals(hit.getBoolean("authenticated"), true);
+            assertEquals((String) hit.get("permission"), "admin.portal.partner.provider.index");
+            testArray = new String[] { "he" };
+            for (int j = 0; j < hit.getArray("partner").length; j++) {
+                assertEquals(hit.getArray("partner")[j], testArray[j]);
+            }
+            testArray = new String[] { "he_hmulv", "he_hlug" };
+            for (int j = 0; j < hit.getArray("provider").length; j++) {
+                assertEquals(hit.getArray("provider")[j], testArray[j]);
+            }
+
+            hit = hits.getHits()[1];
+            assertEquals(hit.getBoolean("authenticated"), true);
+            assertEquals((String) hit.get("permission"), "admin.portal.partner.provider.catalog");
+            testArray = new String[] { "he" };
+            for (int j = 0; j < hit.getArray("partner").length; j++) {
+                assertEquals(hit.getArray("partner")[j], testArray[j]);
+            }
+            testArray = new String[] { "he_hmulv", "he_hlug" };
+            for (int j = 0; j < hit.getArray("provider").length; j++) {
+                assertEquals(hit.getArray("provider")[j], testArray[j]);
+            }
+
+        }
+
     }
 
 }
