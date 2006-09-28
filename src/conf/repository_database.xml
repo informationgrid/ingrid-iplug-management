@@ -57,6 +57,22 @@ using the MetadataManager.
            password="Wah2wa"
            useAutoCommit="1"
      >
+	<connection-pool
+            maxActive="21"
+            minIdle="0"
+            maxIdle="-1"
+            maxWait="2000"
+            minEvictableIdleTimeMillis="60000"
+            numTestsPerEvictionRun="21"
+            testWhileIdle="true"
+            testOnBorrow="true"
+            testOnReturn="true"
+            validationQuery="SELECT 1"
+            timeBetweenEvictionRunsMillis="120000"
+            removeAbandoned="true"
+            removeAbandonedTimeout="120000"
+            whenExhaustedAction="2"
+        />
         <sequence-manager className="org.apache.ojb.broker.util.sequence.SequenceManagerHighLowImpl">
             <attribute attribute-name="grabSize" attribute-value="20"/>
             <attribute attribute-name="autoNaming" attribute-value="true"/>
