@@ -9,6 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import de.ingrid.iplug.management.usecase.ManagementAuthenticationUseCase;
 import de.ingrid.iplug.management.usecase.ManagementDummyAuthenticationUseCase;
 import de.ingrid.iplug.management.usecase.ManagementGetPartnerUseCase;
+import de.ingrid.iplug.management.usecase.ManagementGetProviderAsListUseCase;
 import de.ingrid.iplug.management.usecase.ManagementUseCase;
 import de.ingrid.iplug.management.util.ManagementUtils;
 import de.ingrid.utils.IPlug;
@@ -61,6 +62,8 @@ public class ManagementIPlug implements IPlug {
     private static final int MANAGEMENT_AUTHENTICATE = 0;
 
     private static final int MANAGEMENT_GET_PARTNERS = 1;
+
+    private static final int MANAGEMENT_GET_PROVIDERS_AS_LIST = 2;
 
     private static final int MANAGEMENT_DUMMY_DATA = 815;
 
@@ -120,10 +123,19 @@ public class ManagementIPlug implements IPlug {
                     hitsTemp = uc.execute(query, start, length, this.fPlugId);
 
                     break;
-                // return some dummy data
+                // return partner / provider hierarchy
                 case MANAGEMENT_GET_PARTNERS:
 
                     uc = new ManagementGetPartnerUseCase();
+                    // execute use case
+                    hitsTemp = uc.execute(query, start, length, this.fPlugId);
+
+                    break;
+
+                // return provider list
+                case MANAGEMENT_GET_PROVIDERS_AS_LIST:
+
+                    uc = new ManagementGetProviderAsListUseCase();
                     // execute use case
                     hitsTemp = uc.execute(query, start, length, this.fPlugId);
 

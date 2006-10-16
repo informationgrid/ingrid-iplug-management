@@ -17,22 +17,19 @@ import org.apache.ojb.broker.query.QueryFactory;
 
 import de.ingrid.iplug.management.om.IngridPartner;
 import de.ingrid.iplug.management.om.IngridProvider;
-import de.ingrid.usermanagement.jetspeed.SecurityAccessImpl;
 import de.ingrid.utils.IngridHit;
 import de.ingrid.utils.query.IngridQuery;
 
 /**
- * Delivers all partners and providers in the following structure.
- *   (ArrayList) partners
- *     (HashMap)partner {partnerid="bund", providers=(ArrayList)}
- *       (ArrayList) providers
- *         (HashMap) provider {providerid="bu_bfn"}
+ * Delivers all partners and providers in the following structure. (ArrayList)
+ * partners (HashMap)partner {partnerid="bund", providers=(ArrayList)}
+ * (ArrayList) providers (HashMap) provider {providerid="bu_bfn"}
  * 
  * @author joachim@wemove.com
  */
 public class ManagementGetPartnerUseCase implements ManagementUseCase {
 
-    private static final Log log = LogFactory.getLog(SecurityAccessImpl.class);
+    private static final Log log = LogFactory.getLog(ManagementGetPartnerUseCase.class);
 
     PersistenceBroker broker = null;
 
@@ -64,6 +61,7 @@ public class ManagementGetPartnerUseCase implements ManagementUseCase {
             HashMap partnerHash = new HashMap();
             // add the partner id to the partnerhash
             partnerHash.put("partnerid", partner.getIdent());
+            partnerHash.put("name", partner.getName());
 
             // get providers
             ArrayList providerList = new ArrayList();
@@ -82,6 +80,8 @@ public class ManagementGetPartnerUseCase implements ManagementUseCase {
 
                 HashMap providerHash = new HashMap();
                 providerHash.put("providerid", provider.getIdent());
+                providerHash.put("name", provider.getName());
+                providerHash.put("url", provider.getUrl());
 
                 providerList.add(providerHash);
             }
