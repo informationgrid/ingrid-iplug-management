@@ -257,13 +257,12 @@
             <includes>
                 <include>**/*Test.java</include>
             </includes>
+	        <resources>
+	            <resource>
+	                <directory>src/conf/</directory>
+	            </resource>
+	        </resources>
         </unitTest>
-        <resources>
-            <resource>
-                <directory>src/conf</directory>
-                <filtering>false</filtering>
-            </resource>
-        </resources>
     </build>
     <reports>
         <report>maven-junit-report-plugin</report>
