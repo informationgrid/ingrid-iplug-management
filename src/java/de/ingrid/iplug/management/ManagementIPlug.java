@@ -71,7 +71,7 @@ public class ManagementIPlug implements IPlug {
      * @see de.ingrid.utils.IPlug#configure(de.ingrid.utils.PlugDescription)
      */
     public void configure(PlugDescription plugDescription) throws Exception {
-        log.info("Configuring FPN-iPlug...");
+        log.info("Configuring Management-iPlug...");
 
         this.fPlugDesc = plugDescription;
         this.fPlugId = fPlugDesc.getPlugId();
