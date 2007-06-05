@@ -4,7 +4,7 @@
     <artifactId>ingrid-iplug-management</artifactId>
     <name>ingrid-iplug-management</name>
     <groupId>ingrid</groupId>
-    <currentVersion>0.1-SNAPSHOT</currentVersion>
+    <currentVersion>0.1.0</currentVersion>
     <inceptionYear>2006</inceptionYear>
     <logo>/images/logo.gif</logo>
     <mailingLists>
@@ -18,7 +18,7 @@
     <developers>
         <developer>
             <id>jm</id>
-            <name>Joachim M�ller</name>
+            <name>Joachim Müller</name>
             <email>joachim(at)wemove.com</email>
             <organization>wemove GmbH</organization>
             <organizationUrl>http://www.wemove.com</organizationUrl>
