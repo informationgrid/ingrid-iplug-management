@@ -4,7 +4,7 @@
     <artifactId>ingrid-iplug-management</artifactId>
     <name>ingrid-iplug-management</name>
     <groupId>ingrid</groupId>
-    <currentVersion>0.1.0</currentVersion>
+    <currentVersion>0.2.0-SNAPSHOT</currentVersion>
     <inceptionYear>2006</inceptionYear>
     <logo>/images/logo.gif</logo>
     <mailingLists>
@@ -28,7 +28,7 @@
             </roles>
         </developer>
     </developers>
-    <shortDescription>todo short description</shortDescription>
+    <shortDescription>Ingrid iPlug management</shortDescription>
     <issueTrackingUrl>http://jira.media-style.com/browse/INGRID</issueTrackingUrl>
     <siteAddress>http://harrison.its-technidata.de/ingrid/ingrid-iplug-management</siteAddress>
     <siteDirectory>/srv/www/htdocs/ingrid/ingrid-iplug-management</siteDirectory>
@@ -36,12 +36,6 @@
         <connection>scm:svn:https://127.0.0.1:444/svn/ingrid/ingrid-iplug-management/trunk</connection>
     </repository>
     <dependencies>
-        <dependency>
-            <groupId>weta</groupId>
-            <artifactId>weta-g</artifactId>
-            <version>SNAPSHOT</version>
-            <type>zip</type>
-        </dependency>
         <dependency>
             <groupId>oracle</groupId>
             <artifactId>ojdbc</artifactId>
@@ -79,19 +73,19 @@
         <dependency>
             <groupId>ingrid</groupId>
             <artifactId>ingrid-iplug</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <version>0.2.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>ingrid</groupId>
             <artifactId>ingrid-utils</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <version>0.2.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>ingrid</groupId>
             <artifactId>ingrid-ibus</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <version>0.2.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
         <dependency>
@@ -133,43 +127,6 @@
             <type>jar</type>
         </dependency>
         <dependency>
-            <groupId>weta-components</groupId>
-            <artifactId>communication</artifactId>
-            <version>SNAPSHOT</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>weta-components</groupId>
-            <artifactId>remote-proxies</artifactId>
-            <version>SNAPSHOT</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>weta-components</groupId>
-            <artifactId>communication-sockets</artifactId>
-            <version>SNAPSHOT</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>weta-components</groupId>
-            <artifactId>communication-jxta</artifactId>
-            <version>SNAPSHOT</version>
-            <type>jar</type>
-            <url>http://www.weta-group.net/maven/</url>
-        </dependency>
-        <dependency>
-            <groupId>jxta</groupId>
-            <artifactId>jxta</artifactId>
-            <version>2.3.6</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>bouncycastle</groupId>
-            <artifactId>bcprov</artifactId>
-            <version>jdk14-124</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib-nodep</artifactId>
             <version>2.1_3</version>
@@ -179,25 +136,25 @@
         <dependency>
             <groupId>org.apache.portals.jetspeed-2</groupId>
             <artifactId>jetspeed-security</artifactId>
-            <version>2.1-dev</version>
+            <version>2.1</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.apache.portals.jetspeed-2</groupId>
             <artifactId>jetspeed-api</artifactId>
-            <version>2.1-dev</version>
+            <version>2.1</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.apache.portals.jetspeed-2</groupId>
             <artifactId>jetspeed-commons</artifactId>
-            <version>2.1-dev</version>
+            <version>2.1</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.apache.portals.jetspeed-2</groupId>
             <artifactId>jetspeed-rdbms</artifactId>
-            <version>2.1-dev</version>
+            <version>2.1</version>
             <type>jar</type>
         </dependency>
         <dependency>
@@ -228,13 +185,13 @@
         <dependency>
             <groupId>ingrid</groupId>
             <artifactId>ingrid-jetspeed-portal</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <version>0.2.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>ingrid</groupId>
             <artifactId>ingrid-portal-utils</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <version>0.2.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
         <dependency>
