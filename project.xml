@@ -33,7 +33,7 @@
     <siteAddress>http://harrison.its-technidata.de/ingrid/ingrid-iplug-management</siteAddress>
     <siteDirectory>/srv/www/htdocs/ingrid/ingrid-iplug-management</siteDirectory>
     <repository>
-        <connection>scm:svn:https://127.0.0.1:444/svn/ingrid/ingrid-iplug-management/trunk</connection>
+        <connection>scm:svn:https://127.0.0.1:444/svn/ingrid/ingrid-iplug-management/branches/ingrid-iplug-management-1.0.0</connection>
     </repository>
     <dependencies>
         <dependency>
@@ -79,19 +79,19 @@
         <dependency>
             <groupId>ingrid</groupId>
             <artifactId>ingrid-iplug</artifactId>
-            <version>1.0.0</version>
+            <version>${pom.currentVersion}</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>ingrid</groupId>
             <artifactId>ingrid-utils</artifactId>
-            <version>1.0.0</version>
+            <version>${pom.currentVersion}</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>ingrid</groupId>
             <artifactId>ingrid-ibus</artifactId>
-            <version>1.0.0</version>
+            <version>${pom.currentVersion}</version>
             <type>jar</type>
         </dependency>
         <dependency>
@@ -228,13 +228,13 @@
         <dependency>
             <groupId>ingrid</groupId>
             <artifactId>ingrid-jetspeed-portal</artifactId>
-            <version>1.0.0</version>
+            <version>${pom.currentVersion}</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>ingrid</groupId>
             <artifactId>ingrid-portal-utils</artifactId>
-            <version>1.0.0</version>
+            <version>${pom.currentVersion}</version>
             <type>jar</type>
         </dependency>
         <dependency>
