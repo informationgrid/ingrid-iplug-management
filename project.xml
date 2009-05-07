@@ -4,7 +4,7 @@
     <artifactId>ingrid-iplug-management</artifactId>
     <name>ingrid-iplug-management</name>
     <groupId>ingrid</groupId>
-    <currentVersion>1.1.0-SNAPSHOT</currentVersion>
+    <currentVersion>1.2-SNAPSHOT</currentVersion>
     <inceptionYear>2006</inceptionYear>
     <logo>/images/logo.gif</logo>
     <mailingLists>
