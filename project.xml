@@ -36,7 +36,7 @@
         <connection>scm:svn:https://127.0.0.1:444/svn/ingrid/ingrid-iplug-management/trunk</connection>
     </repository>
     <dependencies>
-        <dependency>
+	    <dependency>
             <groupId>oracle</groupId>
             <artifactId>ojdbc</artifactId>
             <version>9.2.0.4</version>
@@ -45,7 +45,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>3.0.10</version>
+	        <version>3.1.14</version>
             <type>jar</type>
             <url>http://www.ibiblio.org/maven</url>
         </dependency>
@@ -89,6 +89,24 @@
             <type>jar</type>
         </dependency>
         <dependency>
+	      <groupId>ingrid</groupId>
+	      <artifactId>ingrid-ibus-client</artifactId>
+	      <version>1.2-SNAPSHOT</version>
+	      <type>jar</type>
+	    </dependency>
+	    <dependency>
+	      <groupId>ingrid</groupId>
+	      <artifactId>ingrid-communication</artifactId>
+	      <version>1.2-SNAPSHOT</version>
+	      <type>jar</type>
+	    </dependency>
+	    <dependency>
+	      <groupId>de.ingrid.communication</groupId>
+	      <artifactId>ingrid-communication-authentication</artifactId>
+	      <version>1.1-SNAPSHOT</version>
+	      <scope/>
+	    </dependency>
+	    <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
             <version>1.0.2</version>
