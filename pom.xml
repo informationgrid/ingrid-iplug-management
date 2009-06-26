@@ -9,7 +9,7 @@
   <artifactId>ingrid-iplug-management</artifactId>
   <packaging>jar</packaging>
   <version>1.2.0-SNAPSHOT</version>
-  <name>Ingrid management iPlug</name>
+  <name>Ingrid Management iPlug</name>
   <scm>
     <connection>${scmConnectionBase}/ingrid-iplug-management/trunk</connection>
     <developerConnection>${scmConnectionBase}/ingrid-iplug-management/trunk</developerConnection>
@@ -106,6 +106,14 @@
           <groupId>commons-betwixt</groupId>
           <artifactId>commons-betwixt</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>xerces</groupId>
+          <artifactId>xercesImpl</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>xml-apis</groupId>
+          <artifactId>xml-apis</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -123,6 +131,24 @@
       <artifactId>ingrid-jetspeed-portal</artifactId>
       <version>1.2.0</version>
       <type>jar</type>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springmodules</groupId>
+          <artifactId>spring-modules-ojb</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.portals.jetspeed-2</groupId>
+          <artifactId>jetspeed-cm</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.portals.jetspeed-2</groupId>
+          <artifactId>jetspeed-cm</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>de.ingrid</groupId>
@@ -148,6 +174,28 @@
           <descriptors>
             <descriptor>src/main/assembly/bin.xml</descriptor>
           </descriptors>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <archive>
+            <manifestEntries>
+              <Implementation-Version>${version}</Implementation-Version>
+              <Implementation-Build>${buildNumber}</Implementation-Build>
+              <Build-Timestamp>${timestamp}</Build-Timestamp>
+              <!--  
+                one of these: 
+                
+                IPLUG_SE, IPLUG_DSC, IPLUG_SNS, IPLUG_TAMINO, IPLUG_FPN, IPLUG_G2K, IPLUG_CSW, IPLUG_CSW_DSC, OTHER
+                
+                see ingrid-utils:de.ingrid.utils.metadata.IPlugType
+              -->
+              <iPlug-Type>OTHER</iPlug-Type>
+            </manifestEntries>
+          </archive>
         </configuration>
       </plugin>
     </plugins>
