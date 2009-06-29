@@ -53,8 +53,8 @@ using the MetadataManager.
            protocol="jdbc"
            subprotocol="mysql"
            dbalias="//localhost/ingrid-portal"
-           username="root"
-           password=""
+           username="dbUsername"
+           password="dbPassword"
            useAutoCommit="1"
      >
 	<connection-pool

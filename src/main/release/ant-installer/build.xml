@@ -1,0 +1,64 @@
+<project name="PortalU Installation">
+    <description>
+        iPlug-Management Installation Script
+    </description>
+    <!-- set global properties for this build -->
+    <property name="iPlugName"          value="${project.artifactId}-${project.version}"/>
+    <property name="xml-communication"  value="${installDir}/conf/communication.xml"/>
+    <property name="database-config"  value="${installDir}/conf/repository_database.xml"/>
+    
+    <target name="extract" description="Extract all files to the installation directory.">
+        <unzip src="${antinstaller.jar}" dest="${installDir}">
+            <patternset>
+                <include name="${iPlugName}/**/*.*"/>
+            </patternset>
+        </unzip>
+        
+        <move toDir="${installDir}">
+            <fileset dir="${installDir}/${iPlugName}"/>
+        </move>
+    </target>
+    
+    <target name="communication" description="Set configuration correctly for the communication.">
+        <echo>Schreibe Verbindungs-Konfiguration in communication.xml</echo>
+        <xmlproperty file="${xml-communication}" prefix="plugXML"/>
+        <replace file="${xml-communication}" token="${plugXML.communication.client(name)}"                              value="${clientName}"/>
+        <replace file="${xml-communication}" token="${plugXML.communication.client.connections.server(name)}"           value="${serverName}"/>
+        <replace file="${xml-communication}" token="${plugXML.communication.client.connections.server.socket(ip)}"      value="${serverIp}"/>
+        <replace file="${xml-communication}" token="${plugXML.communication.client.connections.server.socket(port)}"    value="${serverPort}"/>     
+    </target>
+	
+    <target name="database" description="Configure the mySQL database.">
+        <echo>Schreiben der DB-Konfiguration in Context-Dateien
+        </echo>
+        <xmlproperty file="${database-config}" prefix="dbXML"/>
+        <replace file="${database-config}" token="${dbXML.jdbc-connection-descriptor(username)}" value="${dbUser}"/>
+        <replace file="${database-config}" token="${dbXML.jdbc-connection-descriptor(password)}" value="${dbPassword}"/>
+        <replace file="${database-config}" token="${dbXML.jdbc-connection-descriptor(dbalias)}" value="${dbAlias}"/>
+    </target>
+	
+    
+    <target name="startIPlug">
+        <echo>
+=================
+Weiteres Vorgehen
+=================
+
+        </echo>
+        <echo>
+Gehen Sie ins Verzeichnis: ${installDir} und
+rufen sie von der Kommandozeile folgendes auf
+"sh admin.sh", um im Webbrowser das iPlug unter
+der folgenden Adresse "http://localhost:8082/step1"
+zu konfigurieren. Anstelle von localhost koennen Sie
+auch die IP-Adresse des Computers eingeben!
+
+Danach beenden Sie den Prozess wieder (Strg+C) und
+rufen "sh start.sh start" auf, um das iPlug zu starten.
+
+Bevor das iPlug benutzt werden kann, muss es in der iBus-
+Administration (im Portal) eingeschaltet werden.
+        </echo>
+    </target>
+    
+</project>
