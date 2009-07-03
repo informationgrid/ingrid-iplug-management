@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document>
+  <properties>
+    <title>Changes Ingrid iPlug Management</title>
+    <author email="joachim@wemove.com">Joachim Müller</author>
+  </properties>
+  <body>
+    
+    <release version="1.2.1" date="2009-07-03" description="Umstellung">
+      <action type="update">
+        Umstellung auf Maven 2
+      </action>
+    </release>
+    
+    <release version="1.2.0" date="2009-05-29" description="Release InGrid2.0">
+      <action type="add" issue="INGRID-1609">
+        Multiproxy Funktionalitaet
+      </action>
+      <action type="add" issue="INGRID-1607">
+        iPlug sendet Version und Release Datum an iBus. Diese wird in der iBus Admin UI dargestellt.
+      </action>
+      <action type="add" issue="INGRID-1605">
+        Anbietertest (Synchronisation der Anbieter)
+      </action>
+      <action type="add" issue="INGRID-1590">
+        Caching der Suchergebnisse
+      </action>
+      <action type="update">
+        neue Kommunikation, kompatibel mit InGrid 2.0
+        Konfigurationsfile f. die communication hat sich geändert: communication.xml statt communication.proerties
+      </action>
+      <action type="update">
+        ACHTUNG: JAVA6 ist jetzt erforderlich
+      </action>
+    </release>
+      
+    <release version="1.1.5" date="2008-03-10" description="Release-fix">
+      <action type="fix">
+        Rechte-Initialisierungsfehler von abhängigem Projekt ingrid-portal-utils
+        (make sure actions always are initialized with '*',  because of an oracle bug, empty strings are stored as NULL, all actions have to have a value != '')
+      </action>
+      <action type="update">
+        neue MySql Treiber Version 3.1.14
+      </action>
+    </release>
+    
+    <release version="1.1.4" date="2007-10-12" description="Fix-Release">
+      <action type="fix">
+        Beachte Proxies, die kein EOF senden
+      </action>
+      <action type="fix">
+        Behebe erneute Anmeldung nach Herunterfahren
+      </action>
+    </release>
+    
+    <release version="1.1.3" date="2007-09-19" description="Release">
+      <action dev="jm" type="update">
+        Austausch der Administrations Oberfläche.
+      </action>
+    </release>
+    
+    <release version="1.1.2" date="2008-08-31" description="Release-fix">
+      <action type="update">
+        Verbesserung der Kommunikationskomponente. 
+      </action>
+      <action type="update">
+        ProxyUser und ProxyPassword werden jetzt Ueber Konfigurationsdatei gesetzt.
+      </action>
+      <action type="update">
+        Eine Http-Proxy Verbindung kann auch ohne Username und Password aufgebaut werden.
+      </action>
+    </release>
+    
+    <release version="1.1.1" date="2008-08-31" description="Release-fix">
+      <action type="fix">
+        Einrichtung der plugdescription über Admininterface funktioniert nicht 
+      </action>
+    </release>
+    
+    <release version="1.1.0" date="2008-08-01" description="Release-fix">
+      <action type="update">
+        Austausch JXTA-Kommunikation gegen TCP/IP-Kommunikation
+      </action>
+    </release>
+  </body>
+</document>
