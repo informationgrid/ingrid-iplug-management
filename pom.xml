@@ -16,14 +16,16 @@
   </scm>
   <repositories>
     <repository>
-      <id>com.bluesunrise.m2</id>
-      <name>Maven2 BlueSunrise</name>
-      <url>http://www.bluesunrise.com/maven2</url>
+      <snapshots />
+      <id>de.ingrid.m2</id>
+      <name>InGrid Repo Maven2</name>
+      <url>http://harrison.its-technidata.de/archiva/repository/ingrid-all</url>
     </repository>
     <repository>
-      <id>de.ingrid.m2</id>
-      <name>Maven2 Repo InGrid</name>
-      <url>http://harrison.its-technidata.de/ingrid/maven2</url>
+      <snapshots />
+      <id>jetspeed-repository</id>
+      <name>jetspeed-repository</name>
+      <url>http://www.bluesunrise.com/maven2</url>
     </repository>
   </repositories>
   <dependencies>
