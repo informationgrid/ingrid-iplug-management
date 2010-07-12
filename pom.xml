@@ -2,7 +2,7 @@
   <parent>
     <artifactId>ingrid-releases-pom</artifactId>
     <groupId>de.ingrid</groupId>
-    <version>1.0.1</version>
+    <version>1.1.0</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.ingrid</groupId>
@@ -16,8 +16,8 @@
   </scm>
   <repositories>
     <repository>
-      <id>de.ingrid.m2</id>
-      <name>InGrid Repo Maven2</name>
+      <id>de.ingrid.all</id>
+      <name>InGrid Repo Maven</name>
       <url>http://harrison.its-technidata.de/archiva/repository/ingrid-all</url>
     </repository>
     <repository>
@@ -43,10 +43,6 @@
       <scope>runtime</scope>
     </dependency>
     <dependency>
-      <groupId>commons-lang</groupId>
-      <artifactId>commons-lang</artifactId>
-    </dependency>
-    <dependency>
       <groupId>de.ingrid</groupId>
       <artifactId>ingrid-iplug-admin-step1-management</artifactId>
       <type>war</type>
@@ -62,21 +58,18 @@
       <groupId>microsoft</groupId>
       <artifactId>msbase</artifactId>
       <version>UNKNOWN</version>
-      <type>jar</type>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>microsoft</groupId>
       <artifactId>mssqlserver</artifactId>
       <version>UNKNOWN</version>
-      <type>jar</type>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>microsoft</groupId>
       <artifactId>msutil</artifactId>
       <version>UNKNOWN</version>
-      <type>jar</type>
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -111,12 +104,6 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>ojb</groupId>
-      <artifactId>db-ojb</artifactId>
-      <type>jar</type>
-      <version>1.0.3</version>
-    </dependency>
-    <dependency>
       <groupId>de.ingrid</groupId>
       <artifactId>ingrid-jetspeed-portal</artifactId>
       <exclusions>
@@ -148,7 +135,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>2.2</version>
         <configuration>
           <archive>
             <manifestEntries>
@@ -161,6 +147,17 @@
             </manifestEntries>
           </archive>
         </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+            <!-- Add Type of Component to Manifest of Installer for Upgrade Server -->
+            <configuration>
+                <archive>
+                  <manifestEntries>
+                      <ingridComponentType>IPLUG_MANAGEMENT</ingridComponentType>
+                </manifestEntries>
+                </archive>
+            </configuration>
       </plugin>
     </plugins>
   </build>
