@@ -28,7 +28,7 @@
         name="iPlugOptions" 
         displayText="Einstellungen fuer den iBus">
         <text property="clientName" displayText="Client ID:" defaultValue="/ingrid-group:iplug-management-'Ihr-Name'" />
-        <comment displayText="" explanatoryText="Der Client-ID muss eindeutig sein, da es sonst zu Kommunikationsproblemen zum iBus f&#195;&#188;hren kann." />
+        <comment displayText="" explanatoryText="Der Client-ID muss eindeutig sein, da es sonst zu Kommunikationsproblemen zum iBus führen kann." />
     </page>
     
     <page 
