@@ -57,6 +57,10 @@ public class ManagementGetPartnerUseCase implements ManagementUseCase {
         while (partners.hasNext()) {
             IngridPartner partner = (IngridPartner) partners.next();
 
+            if (log.isDebugEnabled()) {
+                log.debug("Partner: " + partner.getIdent() + ":" + partner.getName());
+            }
+
             // create a partner hash for each partner
             HashMap partnerHash = new HashMap();
             // add the partner id to the partnerhash
@@ -77,6 +81,10 @@ public class ManagementGetPartnerUseCase implements ManagementUseCase {
 
             while (providers.hasNext()) {
                 IngridProvider provider = (IngridProvider) providers.next();
+
+                if (log.isDebugEnabled()) {
+                    log.debug("Provider: " + provider.getIdent() + ":" + provider.getName());
+                }
 
                 HashMap providerHash = new HashMap();
                 providerHash.put("providerid", provider.getIdent());

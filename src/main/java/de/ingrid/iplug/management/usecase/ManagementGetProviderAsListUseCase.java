@@ -58,6 +58,10 @@ public class ManagementGetProviderAsListUseCase implements ManagementUseCase {
         while (providers.hasNext()) {
             IngridProvider provider = (IngridProvider) providers.next();
 
+            if (log.isDebugEnabled()) {
+                log.debug("Provider: " + provider.getIdent() + ":" + provider.getName());
+            }
+
             HashMap providerHash = new HashMap();
             providerHash.put("providerid", provider.getIdent());
             providerHash.put("name", provider.getName());

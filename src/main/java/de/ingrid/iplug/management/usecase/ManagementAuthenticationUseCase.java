@@ -69,6 +69,11 @@ public class ManagementAuthenticationUseCase implements ManagementUseCase {
                 Iterator it = credentials.iterator();
                 while (it.hasNext()) {
                     PasswordCredential credential = (PasswordCredential) it.next();
+
+                    if (log.isDebugEnabled()) {
+                        log.debug("check authentication on credential.userName: " + credential.getUserName());
+                    }
+
                     if (credential != null && credential.isEnabled() && !credential.isExpired()) {
                         String password = new String(credential.getPassword());
                         // check for PortalPassword == digest
@@ -89,6 +94,10 @@ public class ManagementAuthenticationUseCase implements ManagementUseCase {
                 ch.destroy();
             }
 
+            if (log.isDebugEnabled()) {
+                log.debug("authenticated: " + authenticated);
+            }
+
             ArrayList hits = new ArrayList();
             if (authenticated) {
                 // get permissions for the user
@@ -105,6 +114,11 @@ public class ManagementAuthenticationUseCase implements ManagementUseCase {
 
                 while (e.hasMoreElements()) {
                     Permission permission = (Permission) e.nextElement();
+
+                    if (log.isDebugEnabled()) {
+                        log.debug("Permission: " + permission.getName());
+                    }
+
                     if (permission instanceof IngridPartnerPermission) {
                         IngridPartnerPermission partnerPermission = (IngridPartnerPermission) permission;
                         permissionsPartners.add(partnerPermission.getPartner());
