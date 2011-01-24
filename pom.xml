@@ -2,7 +2,7 @@
   <parent>
     <artifactId>ingrid-releases-pom</artifactId>
     <groupId>de.ingrid</groupId>
-    <version>1.1.0</version>
+    <version>2.3.1</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.ingrid</groupId>
@@ -15,16 +15,12 @@
     <developerConnection>scm:svn:https://harrison.its-technidata.de:444/svn/ingrid/ingrid-iplug-management/trunk</developerConnection>
   </scm>
   <repositories>
-    <repository>
-      <id>de.ingrid.all</id>
-      <name>InGrid Repo Maven</name>
-      <url>http://harrison.its-technidata.de/archiva/repository/ingrid-all</url>
-    </repository>
-    <repository>
-      <id>jetspeed-repository</id>
-      <name>jetspeed-repository</name>
-      <url>http://www.bluesunrise.com/maven2</url>
-    </repository>
+		<!-- Repo of parent pom needed, parent pom may not be installed locally yet -->
+		<repository>
+          <id>de.ingrid.all</id>
+          <name>Maven Repo InGrid</name>
+          <url>http://harrison.its-technidata.de/archiva/repository/ingrid-all</url>
+        </repository>
   </repositories>
   <dependencies>
     <dependency>
