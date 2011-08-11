@@ -5,7 +5,13 @@
     <author email="joachim@wemove.com">Joachim Müller</author>
   </properties>
   <body>
-	  <release version="3.0.0" date="2011-05-06" description="Release InGrid3.0.0">
+    <release version="3.0.?" date="2011-08-??" description="Add-Ons for InGrid 3.0">
+      <action type="add">
+        Added sample configuration for ORACLE (including new ojdbc driver).
+      </action>
+    </release>
+
+    <release version="3.0.0" date="2011-05-06" description="Release InGrid3.0.0">
       <action type="update">
         Use most current dependencies (jars), NO FUNCTIONAL CHANGES !
       </action>

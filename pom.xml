@@ -50,9 +50,13 @@
       <scope>runtime</scope>
     </dependency>
     <dependency>
-      <groupId>oracle</groupId>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>ojdbc</groupId>
       <artifactId>ojdbc</artifactId>
-      <version>9.2.0.4</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
