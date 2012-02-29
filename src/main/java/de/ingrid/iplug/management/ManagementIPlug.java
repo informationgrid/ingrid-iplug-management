@@ -3,20 +3,30 @@
  */
 package de.ingrid.iplug.management;
 
+import java.io.IOException;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import de.ingrid.codelists.CodeListService;
+import de.ingrid.codelists.util.CodeListUtils;
+import de.ingrid.iplug.HeartBeatPlug;
+import de.ingrid.iplug.PlugDescriptionFieldFilters;
 import de.ingrid.iplug.management.usecase.ManagementAuthenticationUseCase;
 import de.ingrid.iplug.management.usecase.ManagementDummyAuthenticationUseCase;
 import de.ingrid.iplug.management.usecase.ManagementGetPartnerUseCase;
 import de.ingrid.iplug.management.usecase.ManagementGetProviderAsListUseCase;
 import de.ingrid.iplug.management.usecase.ManagementUseCase;
 import de.ingrid.iplug.management.util.ManagementUtils;
-import de.ingrid.utils.IPlug;
 import de.ingrid.utils.IngridHit;
 import de.ingrid.utils.IngridHitDetail;
 import de.ingrid.utils.IngridHits;
 import de.ingrid.utils.PlugDescription;
+import de.ingrid.utils.metadata.IMetadataInjector;
+import de.ingrid.utils.processor.IPostProcessor;
+import de.ingrid.utils.processor.IPreProcessor;
 import de.ingrid.utils.query.IngridQuery;
 
 /**
@@ -24,7 +34,8 @@ import de.ingrid.utils.query.IngridQuery;
  * 
  * @author joachim@wemove.com
  */
-public class ManagementIPlug implements IPlug {
+@Service
+public class ManagementIPlug extends HeartBeatPlug {
 
     public static final String DATATYPE_MANAGEMENT = "management";
 
@@ -56,6 +67,10 @@ public class ManagementIPlug implements IPlug {
     private int fTimeOut = 5000;
 
     private String fLanguage = null;
+    
+    // injected by Spring
+    @Autowired
+    private CodeListService codeListService;
 
     private static final long serialVersionUID = ManagementIPlug.class.getName().hashCode();
 
@@ -64,19 +79,36 @@ public class ManagementIPlug implements IPlug {
     private static final int MANAGEMENT_GET_PARTNERS = 1;
 
     private static final int MANAGEMENT_GET_PROVIDERS_AS_LIST = 2;
+    
+    private static final int MANAGEMENT_GET_CODELISTS_AS_LIST = 3;
 
     private static final int MANAGEMENT_DUMMY_DATA = 815;
 
+    public ManagementIPlug() {
+        super(30000, null, null, null, null);
+    };
+    
+    @Autowired
+    public ManagementIPlug(IMetadataInjector[] injector, IPreProcessor[] preProcessors, IPostProcessor[] postProcessors) {
+        super(30000, new PlugDescriptionFieldFilters(), injector, preProcessors, postProcessors);
+    }
+    
     /**
      * @see de.ingrid.utils.IPlug#configure(de.ingrid.utils.PlugDescription)
      */
-    public void configure(PlugDescription plugDescription) throws Exception {
+    @Override
+    public void configure(PlugDescription plugDescription) {
+        super.configure(plugDescription);
         log.info("Configuring Management-iPlug...");
 
         this.fPlugDesc = plugDescription;
         this.fPlugId = fPlugDesc.getPlugId();
-        this.fWorkingDir = fPlugDesc.getWorkinDirectory().getCanonicalPath();
-
+        try {
+            this.fWorkingDir = fPlugDesc.getWorkinDirectory().getCanonicalPath();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -140,6 +172,14 @@ public class ManagementIPlug implements IPlug {
                     hitsTemp = uc.execute(query, start, length, this.fPlugId);
 
                     break;
+                case MANAGEMENT_GET_CODELISTS_AS_LIST:
+                    codeListService.updateFromServer();
+                    hitsTemp = new IngridHit[1];
+                    IngridHit hit = new IngridHit(this.fPlugId, 0, 0, 1.0f);
+                    hitsTemp[0] = hit;
+                    
+                    hitsTemp[0].put("codelists", CodeListUtils.getXmlFromObject(codeListService.getCodeLists()));
+                    break;
                 default:
                     log.error("Unknown management request type.");
                     break;
@@ -190,5 +230,11 @@ public class ManagementIPlug implements IPlug {
     public IngridHitDetail[] getDetails(IngridHit[] hits, IngridQuery query, String[] requestedFields) throws Exception {
         return new IngridHitDetail[0];
     }
+
+    
+    public void setCodeListService(CodeListService codeListService) {
+        this.codeListService = codeListService;
+    }
+
 
 }
