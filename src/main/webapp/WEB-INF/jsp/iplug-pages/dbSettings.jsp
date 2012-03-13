@@ -57,6 +57,7 @@
                         <td><h3>Datenbank-URL:</h3></td>
                         <td>
                             <form:input path="dbUrl" id="dbUrl" />
+                            <br /><span>Die Url zu der Datenbank, welches das Portal verwendet, z.B. '//localhost/ingrid-portal'.</span>
                             <form:errors path="dbUrl" cssClass="error" element="div" />
                         </td>
                     </tr>
@@ -64,6 +65,7 @@
                         <td><h3>Benutername:</h3></td>
                         <td>
                             <form:input path="dbUsername" id="dbUsername" />
+                            <br /><span>Der Benutzername für den Datenbankenzugriff.</span>
                             <form:errors path="dbUsername" cssClass="error" element="div" />
                         </td>
                     </tr>
@@ -71,6 +73,7 @@
                         <td><h3>Passwort:</h3></td>
                         <td>
                             <form:input path="dbPassword" id="dbPassword" />
+                            <br /><span>Das Passwort für den oben angegebenen Benutzer.</span>
                             <form:errors path="dbPassword" cssClass="error" element="div" />
                         </td>
                     </tr>
