@@ -173,6 +173,7 @@ public class ManagementIPlug extends HeartBeatPlug {
 
                     break;
                 case MANAGEMENT_GET_CODELISTS_AS_LIST:
+                    // TODO: use caching?
                     codeListService.updateFromServer();
                     hitsTemp = new IngridHit[1];
                     IngridHit hit = new IngridHit(this.fPlugId, 0, 0, 1.0f);

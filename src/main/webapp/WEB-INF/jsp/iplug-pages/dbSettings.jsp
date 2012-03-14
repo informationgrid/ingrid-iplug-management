@@ -62,7 +62,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><h3>Benutername:</h3></td>
+                        <td><h3>Benutzername:</h3></td>
                         <td>
                             <form:input path="dbUsername" id="dbUsername" />
                             <br /><span>Der Benutzername für den Datenbankenzugriff.</span>
