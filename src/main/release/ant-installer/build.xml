@@ -6,6 +6,7 @@
     <property name="iPlugName"          value="${project.artifactId}-${project.version}"/>
     <property name="xml-communication"  value="${installDir}/conf/communication.xml"/>
     <property name="database-config"  value="${installDir}/conf/repository_database.xml"/>
+    <property name="spring-xml"  value="${installDir}/webapp/WEB-INF/spring.xml"/>
     
     <target name="extract" description="Extract all files to the installation directory.">
         <unzip src="${antinstaller.jar}" dest="${installDir}">
@@ -35,6 +36,14 @@
         <replace file="${database-config}" token="${dbXML.jdbc-connection-descriptor(username)}" value="${dbUser}"/>
         <replace file="${database-config}" token="${dbXML.jdbc-connection-descriptor(password)}" value="${dbPassword}"/>
         <replace file="${database-config}" token="${dbXML.jdbc-connection-descriptor(dbalias)}" value="${dbAlias}"/>
+    </target>
+    
+    <target name="codelist" description="Configure the spring file for codelist repository.">
+        <echo>Schreiben der Codelist-Repository Informationen in spring.xml
+        </echo>
+        <replace file="${spring-xml}" token="@URL@" value="${clUrl}"/>
+        <replace file="${spring-xml}" token="@USERNAME@" value="${clUsername}"/>
+        <replace file="${spring-xml}" token="@PASSWORD@" value="${clPassword}"/>
     </target>
 	
     
