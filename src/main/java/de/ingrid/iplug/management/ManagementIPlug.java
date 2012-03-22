@@ -27,6 +27,7 @@ import de.ingrid.utils.PlugDescription;
 import de.ingrid.utils.metadata.IMetadataInjector;
 import de.ingrid.utils.processor.IPostProcessor;
 import de.ingrid.utils.processor.IPreProcessor;
+import de.ingrid.utils.query.FieldQuery;
 import de.ingrid.utils.query.IngridQuery;
 
 /**
@@ -174,12 +175,12 @@ public class ManagementIPlug extends HeartBeatPlug {
                     break;
                 case MANAGEMENT_GET_CODELISTS_AS_LIST:
                     // TODO: use caching?
-                    codeListService.updateFromServer();
+                    codeListService.updateFromServer(extractLastModifiedTimestamp(query));
                     hitsTemp = new IngridHit[1];
                     IngridHit hit = new IngridHit(this.fPlugId, 0, 0, 1.0f);
                     hitsTemp[0] = hit;
                     
-                    hitsTemp[0].put("codelists", CodeListUtils.getXmlFromObject(codeListService.getCodeLists()));
+                    hitsTemp[0].put("codelists", CodeListUtils.getXmlFromObject(codeListService.getLastModifiedCodelists()));
                     break;
                 default:
                     log.error("Unknown management request type.");
@@ -214,6 +215,16 @@ public class ManagementIPlug extends HeartBeatPlug {
             }
         }
         return new IngridHits(this.fPlugId, 0, new IngridHit[0], true);
+    }
+
+    private Long extractLastModifiedTimestamp(IngridQuery query) {
+        FieldQuery[] fields = query.getFields();
+        for (FieldQuery field : fields) {
+            if (field.containsValue("lastModified")) {
+                return Long.valueOf(field.getFieldValue()); 
+            }
+        }
+        return -1L;
     }
 
     /**
