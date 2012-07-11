@@ -21,9 +21,17 @@
         <comment displayText="" bold="true" explanatoryText="Dieser Assistent hilft Ihnen bei der Installation sowie Konfiguration des iPlugs." />
         <comment displayText="Hinweis: " bold="true"/>
         <comment displayText="" explanatoryText="Wenn dies ein Update ist, dann können die Einstellungen der vorherigen Installation verwendet werden. Dazu muss sich die Datei 'ant.install.properties' im gleichen Verzeichnis wie der Installer befinden. Es empfiehlt sich daher, die Updates immer vom gelichen Verzeichnis auszuführen."/>
+        <target-select
+            property      ="updateOrNew"
+            displayText   ="Neuinstallation oder Update"
+            defaultValue  ="true">
+            <option value="setUpdateProperty" text="Update (Einstellungen bleiben erhalten)"/>
+            <option value="setInstallProperty" text="Neuinstallation"/>
+        </target-select>
     </page>
     
     <page 
+        ifTarget    ="setInstallProperty"
         type="input" 
         name="iPlugOptions" 
         displayText="Einstellungen fuer den iBus">
@@ -32,10 +40,11 @@
     </page>
     
     <page 
-        type="input" 
-        name="iBusOptions" 
-        displayText="Einstellungen fuer den iBus" 
-        target="communication">
+        ifTarget    ="setInstallProperty"
+        type        ="input" 
+        name        ="iBusOptions" 
+        displayText ="Einstellungen fuer den iBus" 
+        target      ="communication">
         <text property="serverName" displayText="Server ID:" defaultValue="/ingrid-group:ibus-'Ihr-Name'" />
         <text property="serverIp" displayText="Server IP:" defaultValue="127.0.0.1" />
         <text property="serverPort" displayText="Server Port:" defaultValue="9900" />
@@ -43,10 +52,11 @@
     </page>
     
     <page 
-        type="input" 
-        name="mysqlOptions" 
-        displayText="Einstellungen fuer die MySQL-Datenbank" 
-        target="database">
+        ifTarget    ="setInstallProperty"
+        type        ="input" 
+        name        ="mysqlOptions" 
+        displayText ="Einstellungen fuer die MySQL-Datenbank" 
+        target      ="database">
         <text property="dbUser" displayText="MySQL Benutzername:" defaultValue="root" />
         <text property="dbPassword" displayText="MySQL Benutzer-Passwort:" defaultValue="" />
         <text property="dbAlias" displayText="MySQL Datenbank-Alias:" defaultValue="//localhost/ingrid-portal" />
@@ -54,11 +64,12 @@
         <comment bold="true" displayText="" explanatoryText="Falls eine andere Datenbank als MySQL zum Einsatz kommt, müssen die Anpassung an der Datei conf/repository_database.xml manuell vorgenommen werden." />
     </page>
     
-    <page 
-        type="input" 
-        name="codelistRepoOptions" 
-        displayText="Einstellungen fuer das Codelist Repository" 
-        target="codelist">
+    <!--ifTarget    ="setInstallProperty" ... not for this version since we need this new information! -->
+    <page         
+        type        ="input" 
+        name        ="codelistRepoOptions" 
+        displayText ="Einstellungen fuer das Codelist Repository" 
+        target      ="codelist">
         <text property="clUrl" displayText="Codelist Repository Url:" defaultValue="http://localhost/codelist-repo/rest/getCodelists" />
         <text property="clUsername" displayText="Repository-Benutzername:" defaultValue="admin" />
         <text property="clPassword" displayText="Repository Passwort:" defaultValue="" />
@@ -66,15 +77,30 @@
     
     <!--  type="input" shows a list of editable options for the installer -->
     <page 
-        type="input" 
-        name="properties" 
-        displayText="Benoetigte Installationsoptionen">
+        ifTarget    ="setInstallProperty"
+        type        ="input" 
+        name        ="properties" 
+        displayText ="Benoetigte Installationsoptionen">
         <directory
             property        ="installDir"
             defaultValue    ="/opt/ingrid/${project.artifactId}-${project.version}"
             defaultValueWin ="${env.ProgramFiles}\${project.artifactId}-${project.version}"
             displayText     ="Installationsverzeichnis"
             create          ="true"/>
+    </page>
+    
+    <page
+        ifTarget    ="setUpdateProperty"
+        type        ="input"
+        name        ="properties"
+        displayText ="Benötigte Installationsoptionen">
+        <directory
+            property            ="installDir"
+            defaultValue        ="/opt/ingrid/${project.artifactId}-${project.version}"
+            defaultValueWin     ="${env.ProgramFiles}\${project.artifactId}-${project.version}"
+            displayText         ="Altes Installationsverzeichnis"
+            create              ="false"
+            checkExists         ="true" />
     </page>
     
     <page 

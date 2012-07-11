@@ -8,10 +8,35 @@
     <property name="database-config"  value="${installDir}/conf/repository_database.xml"/>
     <property name="spring-xml"  value="${installDir}/webapp/WEB-INF/spring.xml"/>
     
+    <target name="setUpdateProperty" depends="extractUpdate">
+        <property name="updateProcedure" value="true" />
+        <property name="installProcedure" value="false" />
+    </target>
+    
+    <target name="setInstallProperty" depends="extract">
+        <property name="installProcedure" value="true" />
+        <property name="updateProcedure" value="false" />
+    </target>
+    
+    
     <target name="extract" description="Extract all files to the installation directory.">
         <unzip src="${antinstaller.jar}" dest="${installDir}">
             <patternset>
                 <include name="${iPlugName}/**/*.*"/>
+            </patternset>
+        </unzip>
+        
+        <move toDir="${installDir}">
+            <fileset dir="${installDir}/${iPlugName}"/>
+        </move>
+    </target>
+    
+    <target name="extractUpdate">
+        <unzip src="${antinstaller.jar}" dest="${installDir}">
+            <patternset>
+                <include name="${iPlugName}/**/*.*"/>
+                <exclude name="${iPlugName}/conf/communication.xml" />
+                <exclude name="${iPlugName}/conf/repository_database.xml" />
             </patternset>
         </unzip>
         
