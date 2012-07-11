@@ -40,6 +40,9 @@
             </patternset>
         </unzip>
         
+        <!-- remove old libs -->
+        <delete dir="${installDir}/lib"/>
+        
         <move toDir="${installDir}">
             <fileset dir="${installDir}/${iPlugName}"/>
         </move>
