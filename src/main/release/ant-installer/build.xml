@@ -86,7 +86,7 @@ Weiteres Vorgehen
 Gehen Sie ins Verzeichnis:
 ${installDir}
 und rufen sie von der Kommandozeile folgendes auf
-"sh admin.sh", um im Webbrowser das iPlug unter
+"sh start.sh start", um im Webbrowser das iPlug unter
 der folgenden Adresse "http://localhost:8082", 
 um das iPlug zu starten und zu konfigurieren. 
 Anstelle von localhost koennen Sie
