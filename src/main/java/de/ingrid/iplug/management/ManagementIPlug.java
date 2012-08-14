@@ -4,6 +4,7 @@
 package de.ingrid.iplug.management;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import de.ingrid.codelists.CodeListService;
+import de.ingrid.codelists.model.CodeList;
 import de.ingrid.codelists.util.CodeListUtils;
 import de.ingrid.iplug.HeartBeatPlug;
 import de.ingrid.iplug.PlugDescriptionFieldFilters;
@@ -175,12 +177,13 @@ public class ManagementIPlug extends HeartBeatPlug {
                     break;
                 case MANAGEMENT_GET_CODELISTS_AS_LIST:
                     // TODO: use caching?
-                    codeListService.updateFromServer(extractLastModifiedTimestamp(query));
+                    List<CodeList> modifiedCodelists = codeListService.updateFromServer(extractLastModifiedTimestamp(query));
                     hitsTemp = new IngridHit[1];
                     IngridHit hit = new IngridHit(this.fPlugId, 0, 0, 1.0f);
                     hitsTemp[0] = hit;
-                    
-                    hitsTemp[0].put("codelists", CodeListUtils.getXmlFromObject(codeListService.getLastModifiedCodelists()));
+                    if (modifiedCodelists != null) {
+                        hitsTemp[0].put("codelists", CodeListUtils.getXmlFromObject(modifiedCodelists));
+                    }
                     break;
                 default:
                     log.error("Unknown management request type.");
