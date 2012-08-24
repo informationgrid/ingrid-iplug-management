@@ -29,6 +29,8 @@
         <move toDir="${installDir}">
             <fileset dir="${installDir}/${iPlugName}"/>
         </move>
+        
+        <mkdir dir="${installDir}/webapp/WEB-INF/work"/>
     </target>
     
     <target name="extractUpdate">
@@ -46,6 +48,8 @@
         <move toDir="${installDir}">
             <fileset dir="${installDir}/${iPlugName}"/>
         </move>
+        
+        <mkdir dir="${installDir}/webapp/WEB-INF/work"/>
     </target>
     
     <target name="communication" description="Set configuration correctly for the communication.">
