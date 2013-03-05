@@ -2,13 +2,13 @@
   <parent>
     <artifactId>ingrid-releases-pom</artifactId>
     <groupId>de.ingrid</groupId>
-    <version>3.3.0-SNAPSHOT</version>
+    <version>3.3.0</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.ingrid</groupId>
   <artifactId>ingrid-iplug-management</artifactId>
   <packaging>jar</packaging>
-  <version>3.3.0-SNAPSHOT</version>
+  <version>3.3.0-RELEASE-SNAPSHOT</version>
   <name>Ingrid Management iPlug</name>
   <scm>
     <connection>scm:svn:https://harrison.its-technidata.de:444/svn/ingrid/ingrid-iplug-management/trunk</connection>
@@ -22,6 +22,7 @@
           <url>http://harrison.its-technidata.de/archiva/repository/ingrid-all</url>
         </repository>
   </repositories>
+
   <dependencyManagement>
     <dependencies>
         <dependency>
@@ -35,84 +36,10 @@
             <artifactId>xml-apis</artifactId>
             <version>1.4.01</version>
         </dependency>
-        <dependency>
-			<groupId>de.ingrid</groupId>
-			<artifactId>ingrid-base-webapp</artifactId>
-            <version>3.2.1</version>
-        </dependency>
-        <dependency>
-			<groupId>de.ingrid</groupId>
-			<artifactId>ingrid-base-webapp</artifactId>
-            <version>3.2.1</version>
-			<classifier>res</classifier>
-			<type>zip</type>
-	    </dependency>
-        <dependency>
-          <groupId>de.ingrid</groupId>
-          <artifactId>ingrid-codelist-service</artifactId>
-          <version>3.2.1</version>
-        </dependency>
     </dependencies>
   </dependencyManagement>
+
   <dependencies>
-    <dependency>
-      <groupId>ant</groupId>
-      <artifactId>ant</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>cglib</groupId>
-      <artifactId>cglib-nodep</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>commons-collections</groupId>
-      <artifactId>commons-collections</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>commons-el</groupId>
-      <artifactId>commons-el</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>ojdbc</groupId>
-      <artifactId>ojdbc</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>microsoft</groupId>
-      <artifactId>msbase</artifactId>
-      <version>UNKNOWN</version>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>microsoft</groupId>
-      <artifactId>mssqlserver</artifactId>
-      <version>UNKNOWN</version>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>microsoft</groupId>
-      <artifactId>msutil</artifactId>
-      <version>UNKNOWN</version>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-        <groupId>xerces</groupId>
-        <artifactId>xercesImpl</artifactId>
-        <version>2.10.0</version>
-    </dependency>
-    <dependency>
-        <groupId>xml-apis</groupId>
-        <artifactId>xml-apis</artifactId>
-        <version>1.4.01</version>
-    </dependency>
     <dependency>
       <groupId>de.ingrid</groupId>
       <artifactId>ingrid-iplug</artifactId>
@@ -166,11 +93,6 @@
 <!--       </exclusions> -->
     </dependency>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>de.ingrid</groupId>
       <artifactId>ingrid-jetspeed-portal</artifactId>
       <exclusions>
@@ -193,10 +115,6 @@
       <artifactId>ingrid-portal-utils</artifactId>
     </dependency>
     <dependency>
-      <groupId>portlet-api</groupId>
-      <artifactId>portlet-api</artifactId>
-    </dependency>
-    <dependency>
       <groupId>de.ingrid</groupId>
       <artifactId>ingrid-base-webapp</artifactId>
     </dependency>
@@ -207,14 +125,6 @@
       <type>zip</type>
     </dependency>
     <dependency>
-      <groupId>commons-httpclient</groupId>
-      <artifactId>commons-httpclient</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>commons-fileupload</groupId>
-      <artifactId>commons-fileupload</artifactId>
-    </dependency>
-    <dependency>
       <groupId>de.ingrid</groupId>
       <artifactId>ingrid-codelist-service</artifactId>
       <exclusions>
@@ -223,6 +133,79 @@
           <artifactId>quartz</artifactId>
         </exclusion>
       </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>ant</groupId>
+      <artifactId>ant</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>cglib</groupId>
+      <artifactId>cglib-nodep</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-collections</groupId>
+      <artifactId>commons-collections</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-el</groupId>
+      <artifactId>commons-el</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>ojdbc</groupId>
+      <artifactId>ojdbc</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>microsoft</groupId>
+      <artifactId>msbase</artifactId>
+      <version>UNKNOWN</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>microsoft</groupId>
+      <artifactId>mssqlserver</artifactId>
+      <version>UNKNOWN</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>microsoft</groupId>
+      <artifactId>msutil</artifactId>
+      <version>UNKNOWN</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+        <groupId>xerces</groupId>
+        <artifactId>xercesImpl</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>xml-apis</groupId>
+        <artifactId>xml-apis</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>portlet-api</groupId>
+      <artifactId>portlet-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-httpclient</groupId>
+      <artifactId>commons-httpclient</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
     </dependency>
   </dependencies>
   <build>
