@@ -50,6 +50,7 @@ public class ManagementAuthenticationUseCase implements ManagementUseCase {
         IngridHit hit = null;
         String login = null;
         String digest = null;
+        String onlyRoles = null;
         IngridCredentialHandler ch = null;
         IngridHit[] result = null;
 
@@ -57,6 +58,8 @@ public class ManagementAuthenticationUseCase implements ManagementUseCase {
             // get login and passwd from query
             login = ManagementUtils.getField(query, "login");
             digest = ManagementUtils.getField(query, "digest");
+            onlyRoles = ManagementUtils.getField(query, "onlyRoles");
+            
             hit = new IngridHit(plugId, 0, 0, 1.0f);
 
             // authenticate
@@ -99,7 +102,7 @@ public class ManagementAuthenticationUseCase implements ManagementUseCase {
             }
 
             ArrayList hits = new ArrayList();
-            if (authenticated) {
+            if (authenticated || onlyRoles != null && onlyRoles.equals("true")) {
                 // get permissions for the user
                 IngridPermissionManager pm = new IngridPermissionManager();
                 IngridRoleManager rm = new IngridRoleManager();
