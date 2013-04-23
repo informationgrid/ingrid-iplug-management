@@ -40,6 +40,9 @@
     <bean id="indexWrapper" class="de.ingrid.search.utils.LuceneIndexReaderWrapper">
         <qualifier value="XMLconfiguredIndexWrapper" />
     </bean>
+    
+    <!-- STEMMER: Create stemmer explicitly via xml ! Will be autowired to parsers, index writer ... ! -->
+    <bean id="stemmerGERMAN" class="de.ingrid.admin.search.GermanStemmer"/>
 
 
     <!-- Single parsers are injected explicitly (but created via annotation mechanism) -->
