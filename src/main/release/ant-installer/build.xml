@@ -1,4 +1,4 @@
-<project name="PortalU Installation">
+<project name="PortalU Installation" basedir=".">
     <description>
         iPlug-Management Installation Script
     </description>
@@ -8,7 +8,18 @@
     <property name="database-config"  value="${installDir}/conf/repository_database.xml"/>
     <property name="spring-xml"  value="${installDir}/webapp/WEB-INF/spring.xml"/>
     
-    <target name="setUpdateProperty" depends="extractUpdate">
+    <!-- THIS PORPERTIES ARE NECESSARY FOR UPDATES -->
+    <property name="libraryDir"         value="lib" />
+    <property name="libraryIdent"       value="ingrid-iplug-management-" />
+    <!-- <property name="libraryIdent"       value="MANIFEST.MF" /> -->
+    <property name="versionsWithConfigurations"  value="3.3.0" />
+    <property name="minSupportedVersion" value="3.3.0" />
+
+    <import file="build-installer-utils.xml"  as="utils" />
+    <import file="build-patch.xml"            as="patch" />
+
+
+    <target name="setUpdateProperty" depends="checkPreconditionsForUpdate, extractUpdate">
         <property name="updateProcedure" value="true" />
         <property name="installProcedure" value="false" />
     </target>
@@ -34,22 +45,22 @@
     </target>
     
     <target name="extractUpdate">
-        <unzip src="${antinstaller.jar}" dest="${installDir}">
+        <unzip src="${antinstaller.jar}" dest=".">
             <patternset>
-                <include name="${iPlugName}/**/*.*"/>
+                <include name="**/*.*"/>
                 <exclude name="${iPlugName}/conf/communication.xml" />
                 <exclude name="${iPlugName}/conf/repository_database.xml" />
+                <exclude name="${iPlugName}/webapp/WEB-INF/spring.xml" />
             </patternset>
         </unzip>
         
-        <!-- remove old libs -->
-        <delete dir="${installDir}/lib"/>
+        <delete>
+            <fileset dir="${installDir}/lib" includes="**/*"/>
+        </delete>
         
         <move toDir="${installDir}">
-            <fileset dir="${installDir}/${iPlugName}"/>
+            <fileset dir="./${componentName}"/>
         </move>
-        
-        <mkdir dir="${installDir}/webapp/WEB-INF/work"/>
     </target>
     
     <target name="communication" description="Set configuration correctly for the communication.">
