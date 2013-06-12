@@ -59,7 +59,7 @@
         </delete>
         
         <move toDir="${installDir}">
-            <fileset dir="./${componentName}"/>
+            <fileset dir="./${iPlugName}"/>
         </move>
     </target>
     
