@@ -54,11 +54,18 @@
         ifTarget    ="setInstallProperty"
         type        ="input" 
         name        ="mysqlOptions" 
-        displayText ="Einstellungen fuer die MySQL-Datenbank" 
+        displayText ="Einstellungen fuer die MySQL/ORACLE-Datenbank" 
         target      ="database">
-        <text property="dbUser" displayText="MySQL Benutzername:" defaultValue="root" />
-        <text property="dbPassword" displayText="MySQL Benutzer-Passwort:" defaultValue="" />
-        <text property="dbAlias" displayText="MySQL Datenbank-Alias:" defaultValue="//localhost/ingrid-portal" />
+        <target-select
+            property      ="dbChoice"
+            displayText   ="Datenbankwahl"
+            defaultValue  ="true">
+            <option value="configureMySQL" text="MySQL"/>
+            <option value="configureOracle" text="Oracle"/>
+        </target-select>
+        <text property="dbUser" displayText="Benutzername:" defaultValue="root" />
+        <text property="dbPassword" displayText="Benutzer-Passwort:" defaultValue="" />
+        <text property="dbAlias" displayText="Datenbank-Alias:" defaultValue="//localhost/ingrid-portal" />
         <comment bold="false" displayText="" explanatoryText="Diese Daten werden für den Zugriff auf die Portaldatenbank benötigt." />
         <comment bold="true" displayText="" explanatoryText="Falls eine andere Datenbank als MySQL zum Einsatz kommt, müssen die Anpassung an der Datei conf/repository_database.xml manuell vorgenommen werden." />
     </page>

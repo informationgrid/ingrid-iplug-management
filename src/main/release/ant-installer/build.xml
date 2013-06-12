@@ -72,7 +72,7 @@
         <replace file="${xml-communication}" token="${plugXML.communication.client.connections.server.socket(port)}"    value="${serverPort}"/>     
     </target>
 	
-    <target name="database" description="Configure the mySQL database.">
+    <target name="database" description="Configure the database.">
         <echo>Schreiben der DB-Konfiguration in Context-Dateien
         </echo>
         <xmlproperty file="${database-config}" prefix="dbXML"/>
@@ -80,6 +80,19 @@
         <replace file="${database-config}" token="${dbXML.jdbc-connection-descriptor(password)}" value="${dbPassword}"/>
         <replace file="${database-config}" token="${dbXML.jdbc-connection-descriptor(dbalias)}" value="${dbAlias}"/>
     </target>
+
+    <target name="configureMySQL" description="Configure mySQL options."><!-- everything already set --></target>
+
+    <target name="configureOracle" description="Configure mySQL options.">
+        <xmlproperty file="${database-config}" prefix="dbXML"/>
+        <replace file="${database-config}" token="${dbXML.jdbc-connection-descriptor(jcd-alias)}" value="databaseOracle"/>
+        <replace file="${database-config}" token="${dbXML.jdbc-connection-descriptor(platform)}" value="Oracle"/>
+        <replace file="${database-config}" token="${dbXML.jdbc-connection-descriptor(driver)}" value="oracle.jdbc.OracleDriver"/>
+        <replace file="${database-config}" token="${dbXML.jdbc-connection-descriptor(subprotocol)}" value="oracle"/>
+        <replace file="${database-config}" token="${dbXML.jdbc-connection-descriptor(jdbc-level)}" value="3.0"/>
+        <replace file="${database-config}" token="${dbXML.jdbc-connection-descriptor.connection-pool(validationQuery)}" value="SELECT 1 FROM DUAL"/>
+    </target>
+
     
     <target name="codelist" description="Configure the spring file for codelist repository.">
         <echo>Schreiben der Codelist-Repository Informationen in spring.xml
