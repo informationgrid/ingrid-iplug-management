@@ -11,6 +11,9 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tngtech.configbuilder.ConfigBuilder;
+
+import de.ingrid.admin.JettyStarter;
 import de.ingrid.codelists.CodeListService;
 import de.ingrid.codelists.model.CodeList;
 import de.ingrid.codelists.util.CodeListUtils;
@@ -87,6 +90,8 @@ public class ManagementIPlug extends HeartBeatPlug {
 
     private static final int MANAGEMENT_DUMMY_DATA = 815;
 
+    public static Configuration conf;
+	
     public ManagementIPlug() {
         super(30000, null, null, null, null);
     };
@@ -251,5 +256,8 @@ public class ManagementIPlug extends HeartBeatPlug {
         this.codeListService = codeListService;
     }
 
-
+    public static void main(String[] args) throws Exception {
+        conf = new ConfigBuilder<Configuration>(Configuration.class).withCommandLineArgs(args).build();
+        new JettyStarter( conf );
+    }
 }

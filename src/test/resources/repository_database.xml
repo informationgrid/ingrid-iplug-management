@@ -1,6 +1,4 @@
-<!-- @version $Id: repository_database.xml 239550 2005-08-24 07:26:20Z ate $ -->
-
-<!--
+<!-- @version $Id: repository_database.xml 239550 2005-08-24 07:26:20Z ate $ --><!--
 #/* Copyright 2002-2004 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
--->
-
-<!--
+--><!--
 Define here all used connections.
 One defined connection should be defined as the default one,
 by set default-connection="true" - this could be done at runtime too.
@@ -29,9 +25,7 @@ different user/password.
 
 Ditto it is possible to add jdbc-connection-descriptor at runtime
 using the MetadataManager.
--->
-
-<!-- 
+--><!-- 
 	This is just a partial definition. The properties given will be merged 
 	with additional properties by a ConnectionRepositoryEntry JavaBean
 	instantiated in datasource.xml. This bean handles configuration of the
@@ -42,37 +36,8 @@ using the MetadataManager.
         default-connection="true"
         batch-mode="false"
      >
-	-->
-
-    <jdbc-connection-descriptor
-           jcd-alias="databaseMySQL"
-           default-connection="true"
-           platform="MySQL"
-           jdbc-level="2.0"
-           driver="com.mysql.jdbc.Driver"
-           protocol="jdbc"
-           subprotocol="mysql"
-           dbalias="//localhost/ingrid-portal"
-           username="root"
-           password=""
-           useAutoCommit="1"
-     >
-	<connection-pool
-            maxActive="21"
-            minIdle="0"
-            maxIdle="-1"
-            maxWait="2000"
-            minEvictableIdleTimeMillis="60000"
-            numTestsPerEvictionRun="21"
-            testWhileIdle="true"
-            testOnBorrow="true"
-            testOnReturn="true"
-            validationQuery="SELECT 1"
-            timeBetweenEvictionRunsMillis="120000"
-            removeAbandoned="true"
-            removeAbandonedTimeout="120000"
-            whenExhaustedAction="2"
-        />
+	--><jdbc-connection-descriptor dbalias="//localhost/ingrid-portal" default-connection="true" driver="com.mysql.jdbc.Driver" jcd-alias="databaseMySQL" jdbc-level="2.0" password="" platform="MySQL" protocol="jdbc" subprotocol="mysql" useAutoCommit="1" username="root">
+	<connection-pool maxActive="21" maxIdle="-1" maxWait="2000" minEvictableIdleTimeMillis="60000" minIdle="0" numTestsPerEvictionRun="21" removeAbandoned="true" removeAbandonedTimeout="120000" testOnBorrow="true" testOnReturn="true" testWhileIdle="true" timeBetweenEvictionRunsMillis="120000" validationQuery="SELECT 1" whenExhaustedAction="2"/>
         <sequence-manager className="org.apache.ojb.broker.util.sequence.SequenceManagerHighLowImpl">
             <attribute attribute-name="grabSize" attribute-value="20"/>
             <attribute attribute-name="autoNaming" attribute-value="true"/>
@@ -80,4 +45,3 @@ using the MetadataManager.
             <attribute attribute-name="globalSequenceStart" attribute-value="10000"/>
         </sequence-manager>
    </jdbc-connection-descriptor>
-
