@@ -19,6 +19,9 @@ public class Configuration implements IConfig {
     
     private static Log log = LogFactory.getLog(Configuration.class);
     
+    @PropertyValue("plugdescription.fields")
+    public String fields;
+    
     @PropertyValue("plugdescription.isRecordLoader")
     @DefaultValue("false")
     public boolean recordLoader;
@@ -30,10 +33,14 @@ public class Configuration implements IConfig {
     @Override
     public void addPlugdescriptionValues( PlugdescriptionCommandObject pdObject ) {
         pdObject.put( "iPlugClass", "de.ingrid.iplug.management.ManagementIPlug" );
-        pdObject.addField("login");
-        pdObject.addField("digest");
-        pdObject.addField("management_request_type");
-        pdObject.addField("incl_meta");
+        
+        if(pdObject.getFields().length == 0){
+        	String[] fieldsList = fields.split(",");
+    		for(String field : fieldsList){
+    			pdObject.addField(field);
+    		}
+        }
+        
         pdObject.setRecordLoader(recordLoader);
     }
 
