@@ -4,9 +4,8 @@
     </description>
     <!-- set global properties for this build -->
     <property name="iPlugName"          value="${project.artifactId}-${project.version}"/>
-    <property name="xml-communication"  value="${installDir}/conf/communication.xml"/>
     <property name="database-config"  value="${installDir}/conf/repository_database.xml"/>
-    <property name="spring-xml"  value="${installDir}/webapp/WEB-INF/spring.xml"/>
+	<property name="config"             value="${installDir}/conf/config.override.properties"/>
     
     <!-- THIS PORPERTIES ARE NECESSARY FOR UPDATES -->
     <property name="libraryDir"         value="lib" />
@@ -48,9 +47,7 @@
         <unzip src="${antinstaller.jar}" dest=".">
             <patternset>
                 <include name="**/*.*"/>
-                <exclude name="${iPlugName}/conf/communication.xml" />
                 <exclude name="${iPlugName}/conf/repository_database.xml" />
-                <exclude name="${iPlugName}/webapp/WEB-INF/spring.xml" />
             </patternset>
         </unzip>
         
@@ -63,15 +60,6 @@
         </move>
     </target>
     
-    <target name="communication" description="Set configuration correctly for the communication.">
-        <echo>Schreibe Verbindungs-Konfiguration in communication.xml</echo>
-        <xmlproperty file="${xml-communication}" prefix="plugXML"/>
-        <replace file="${xml-communication}" token="${plugXML.communication.client(name)}"                              value="${clientName}"/>
-        <replace file="${xml-communication}" token="${plugXML.communication.client.connections.server(name)}"           value="${serverName}"/>
-        <replace file="${xml-communication}" token="${plugXML.communication.client.connections.server.socket(ip)}"      value="${serverIp}"/>
-        <replace file="${xml-communication}" token="${plugXML.communication.client.connections.server.socket(port)}"    value="${serverPort}"/>     
-    </target>
-	
     <target name="database" description="Configure the database.">
         <echo>Schreiben der DB-Konfiguration in Context-Dateien
         </echo>
@@ -95,11 +83,14 @@
 
     
     <target name="codelist" description="Configure the spring file for codelist repository.">
-        <echo>Schreiben der Codelist-Repository Informationen in spring.xml
+        <echo>Schreiben der Codelist-Repository Informationen in configuration
         </echo>
-        <replace file="${spring-xml}" token="@URL@" value="${clUrl}"/>
-        <replace file="${spring-xml}" token="@USERNAME@" value="${clUsername}"/>
-        <replace file="${spring-xml}" token="@PASSWORD@" value="${clPassword}"/>
+    	<touch file="${config}"/>
+        <propertyfile file="${config}">
+            <entry key="codelist.requestUrl" value="${clUrl}" />
+            <entry key="codelist.username" value="${clUsername}" />
+            <entry key="codelist.password" value="${clPassword}" />
+        </propertyfile>
     </target>
 	
     
