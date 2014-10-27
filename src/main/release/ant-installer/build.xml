@@ -90,6 +90,7 @@
             <entry key="codelist.requestUrl" value="${clUrl}" />
             <entry key="codelist.username" value="${clUsername}" />
             <entry key="codelist.password" value="${clPassword}" />
+        	<entry key="jetty.port" value="${localServerPort}" />
         </propertyfile>
     </target>
 	
