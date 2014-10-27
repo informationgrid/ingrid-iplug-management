@@ -135,6 +135,10 @@
           <groupId>opensymphony</groupId>
           <artifactId>quartz</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
