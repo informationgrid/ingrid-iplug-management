@@ -12,6 +12,7 @@ import com.tngtech.configbuilder.annotation.valueextractor.PropertyValue;
 
 import de.ingrid.admin.IConfig;
 import de.ingrid.admin.command.PlugdescriptionCommandObject;
+import de.ingrid.utils.PlugDescription;
 
 @PropertiesFiles({ "config" })
 @PropertyLocations(directories = { "conf" }, fromClassLoader = true)
@@ -48,14 +49,13 @@ public class Configuration implements IConfig {
     @Override
     public void addPlugdescriptionValues(PlugdescriptionCommandObject pdObject) {
         pdObject.put( "iPlugClass", "de.ingrid.iplug.management.ManagementIPlug" );
-
-        // add default fields, which shall not be configured!
-        // these fields only have to be added once, since they do not change in this iPlug
-        if ( pdObject.getFields() == null || pdObject.getFields().length == 0 ) {
-            pdObject.addField( "login" );
-            pdObject.addField( "digest" );
-            pdObject.addField( "management_request_type" );
-        }
+        
+        pdObject.removeFromList(PlugDescription.FIELDS, "login");
+        pdObject.addField("login");
+        pdObject.removeFromList(PlugDescription.FIELDS, "digest");
+        pdObject.addField("digest");
+        pdObject.removeFromList(PlugDescription.FIELDS, "management_request_type");
+        pdObject.addField("management_request_type");
         
         pdObject.setRecordLoader( recordLoader );
     }

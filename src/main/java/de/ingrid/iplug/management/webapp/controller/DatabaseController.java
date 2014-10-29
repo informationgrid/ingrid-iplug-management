@@ -29,7 +29,6 @@ import org.xml.sax.SAXException;
 
 import de.ingrid.admin.command.PlugdescriptionCommandObject;
 import de.ingrid.iplug.management.webapp.object.DbSettings;
-import de.ingrid.utils.PlugDescription;
 
 @Controller
 @SessionAttributes("plugDescription")
@@ -76,13 +75,6 @@ public class DatabaseController {
     @RequestMapping(value = "/iplug-pages/dbSettings.html", method = RequestMethod.POST)
     public String post(@ModelAttribute("dbSettings") final DbSettings dbSettings,
             @ModelAttribute("plugDescription") final PlugdescriptionCommandObject plugDescription) {
-        
-        plugDescription.removeFromList(PlugDescription.FIELDS, "login");
-        plugDescription.addField("login");
-        plugDescription.removeFromList(PlugDescription.FIELDS, "digest");
-        plugDescription.addField("digest");
-        plugDescription.removeFromList(PlugDescription.FIELDS, "management_request_type");
-        plugDescription.addField("management_request_type");
         
         saveChangesInFile(dbSettings);
         
