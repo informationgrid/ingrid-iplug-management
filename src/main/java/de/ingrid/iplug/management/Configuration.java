@@ -49,14 +49,14 @@ public class Configuration implements IConfig {
     public void addPlugdescriptionValues(PlugdescriptionCommandObject pdObject) {
         pdObject.put( "iPlugClass", "de.ingrid.iplug.management.ManagementIPlug" );
 
-        // add default fields
-        pdObject.remove( "login" );
-        pdObject.addField( "login" );
-        pdObject.remove( "digest" );
-        pdObject.addField( "digest" );
-        pdObject.remove( "management_request_type" );
-        pdObject.addField( "management_request_type" );
-
+        // add default fields, which shall not be configured!
+        // these fields only have to be added once, since they do not change in this iPlug
+        if ( pdObject.getFields() == null || pdObject.getFields().length == 0 ) {
+            pdObject.addField( "login" );
+            pdObject.addField( "digest" );
+            pdObject.addField( "management_request_type" );
+        }
+        
         pdObject.setRecordLoader( recordLoader );
     }
 
