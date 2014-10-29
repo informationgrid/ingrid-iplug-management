@@ -17,6 +17,7 @@ import de.ingrid.admin.command.PlugdescriptionCommandObject;
 @PropertyLocations(directories = { "conf" }, fromClassLoader = true)
 public class Configuration implements IConfig {
 
+    @SuppressWarnings("unused")
     private static Log log = LogFactory.getLog( Configuration.class );
 
     @PropertyValue("plugdescription.isRecordLoader")
@@ -49,9 +50,12 @@ public class Configuration implements IConfig {
         pdObject.put( "iPlugClass", "de.ingrid.iplug.management.ManagementIPlug" );
 
         // add default fields
-        pdObject.addField("login");
-        pdObject.addField("digest");
-        pdObject.addField("management_request_type");
+        pdObject.remove( "login" );
+        pdObject.addField( "login" );
+        pdObject.remove( "digest" );
+        pdObject.addField( "digest" );
+        pdObject.remove( "management_request_type" );
+        pdObject.addField( "management_request_type" );
 
         pdObject.setRecordLoader( recordLoader );
     }
