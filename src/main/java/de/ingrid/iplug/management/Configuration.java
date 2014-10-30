@@ -21,10 +21,6 @@ public class Configuration implements IConfig {
     @SuppressWarnings("unused")
     private static Log log = LogFactory.getLog( Configuration.class );
 
-    @PropertyValue("plugdescription.isRecordLoader")
-    @DefaultValue("false")
-    public boolean recordLoader;
-
     @PropertyValue("codelist.requestUrl")
     @DefaultValue("http://localhost:8089/rest/getCodelists")
     public String codelistRequestUrl;
@@ -56,8 +52,6 @@ public class Configuration implements IConfig {
         pdObject.addField("digest");
         pdObject.removeFromList(PlugDescription.FIELDS, "management_request_type");
         pdObject.addField("management_request_type");
-        
-        pdObject.setRecordLoader( recordLoader );
     }
 
     @Override
