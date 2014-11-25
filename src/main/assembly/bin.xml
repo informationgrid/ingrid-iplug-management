@@ -35,14 +35,12 @@
             </outputDirectory>
         </fileSet>
         <fileSet>
-            <directory>src/main/release/scripts
-			</directory>
-            <outputDirectory>${project.artifactId}-${project.version}/
-            </outputDirectory>
+            <directory>src/main/release/scripts</directory>
+            <outputDirectory>${project.artifactId}-${project.version}/</outputDirectory>
+            <lineEnding>unix</lineEnding>
         </fileSet>
         <fileSet>
-            <directory>src/main/release/ant-installer
-			</directory>
+            <directory>src/main/release/ant-installer</directory>
             <outputDirectory>/</outputDirectory>
             <filtered>true</filtered>
         </fileSet>
