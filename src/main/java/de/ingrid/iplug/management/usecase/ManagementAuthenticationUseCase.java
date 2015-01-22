@@ -25,29 +25,10 @@
  */
 package de.ingrid.iplug.management.usecase;
 
-import java.security.Permission;
-import java.security.Permissions;
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.Set;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.jetspeed.security.PasswordCredential;
-import org.apache.jetspeed.security.spi.CredentialPasswordEncoder;
-import org.apache.jetspeed.security.spi.PasswordCredentialProvider;
 
-import de.ingrid.iplug.management.util.ManagementUtils;
-import de.ingrid.portal.security.permission.IngridPartnerPermission;
-import de.ingrid.portal.security.permission.IngridPortalPermission;
-import de.ingrid.portal.security.permission.IngridProviderPermission;
-import de.ingrid.portal.security.util.SecurityHelper;
 import de.ingrid.usermanagement.jetspeed.IngridCredentialHandler;
-import de.ingrid.usermanagement.jetspeed.IngridPermissionManager;
-import de.ingrid.usermanagement.jetspeed.IngridRoleManager;
-import de.ingrid.usermanagement.jetspeed.IngridUserSecurityHandler;
 import de.ingrid.utils.IngridHit;
 import de.ingrid.utils.query.IngridQuery;
 
@@ -76,6 +57,9 @@ public class ManagementAuthenticationUseCase implements ManagementUseCase {
         IngridCredentialHandler ch = null;
         IngridHit[] result = null;
 
+        log.error("Authenticate Method DISABLED in Management iPlug. NOT used anymore ! Access to Jetspeed has to be adapted to Jetspeed 2.3 (ingrid-jetspeed-portal jar) !");
+
+/*
         try {
             // get login and passwd from query
             login = ManagementUtils.getField(query, "login");
@@ -186,6 +170,7 @@ public class ManagementAuthenticationUseCase implements ManagementUseCase {
         } catch (Throwable t) {
             log.error("Error executing " + this.getClass().getName() + "!", t);
         }
+*/
         return result;
     }
 
