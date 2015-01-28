@@ -2,7 +2,7 @@
  * **************************************************-
  * Ingrid Management iPlug
  * ==================================================
- * Copyright (C) 2014 wemove digital solutions GmbH
+ * Copyright (C) 2014 - 2015 wemove digital solutions GmbH
  * ==================================================
  * Licensed under the EUPL, Version 1.1 or – as soon they will be
  * approved by the European Commission - subsequent versions of the
@@ -32,22 +32,6 @@ import de.ingrid.codelists.comm.IngridCLCommunication;
 
 @Configuration
 public class SpringConfiguration {
-
-    // <bean id="httpCommunication"
-    // class="de.ingrid.codelists.comm.HttpCLCommunication">
-    // <property name="requestUrl"
-    // value="http://localhost:8089/rest/getCodelists" />
-    // <property name="username" value="admin" />
-    // <property name="password" value="admin" />
-    // </bean>
-    // <bean id="codeListService" class="de.ingrid.codelists.CodeListService">
-    // <!-- <property name="persistencies"> -->
-    // <!-- <list> -->
-    // <!-- <ref bean="xmlPersistency" /> -->
-    // <!-- </list> -->
-    // <!-- </property> -->
-    // <property name="defaultPersistency" value="-1" />
-    // </bean>
 
     @Bean
     public ICodeListCommunication httpCommunication() {

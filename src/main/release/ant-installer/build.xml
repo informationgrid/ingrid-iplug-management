@@ -105,7 +105,7 @@
 
     
     <target name="codelist" description="Configure the spring file for codelist repository.">
-        <echo>Schreiben der Codelist-Repository Informationen in configuration
+        <echo>Schreiben der Codelist-Repository Informationen und den Port in configuration
         </echo>
     	<touch file="${config}"/>
         <propertyfile file="${config}">
