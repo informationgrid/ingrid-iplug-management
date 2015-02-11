@@ -45,8 +45,6 @@ and import project into eclipse.
 
 ### Debug under eclipse
 
-### Debug under eclipse
-
 - execute `mvn install` to expand the base web application
 - set up a java application Run Configuration with start class `de.ingrid.iplug.management.ManagementIPlug`
 - add the VM argument `-Djetty.webapp=src/main/webapp` to the Run Configuration
