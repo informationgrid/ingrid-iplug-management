@@ -3,7 +3,7 @@
   <parent>
     <artifactId>ingrid-releases-pom</artifactId>
     <groupId>de.ingrid</groupId>
-    <version>3.5.0</version>
+    <version>3.5.1</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.ingrid</groupId>
@@ -17,82 +17,87 @@
     <tag>HEAD</tag>
   </scm>
   <repositories>
-		<!-- Repo of parent pom needed, parent pom may not be installed locally yet -->
-		<repository>
-          <id>de.ingrid.all</id>
-          <name>Maven Repo InGrid</name>
-          <url>https://dev.informationgrid.eu/archiva/repository/ingrid-all</url>
-        </repository>
+    <!-- Repo of parent pom needed, parent pom may not be installed locally yet -->
+    <repository>
+      <id>de.ingrid.all</id>
+      <name>Maven Repo InGrid</name>
+      <url>https://dev.informationgrid.eu/archiva/repository/ingrid-all</url>
+    </repository>
   </repositories>
-
   <dependencyManagement>
     <dependencies>
-        <dependency>
-            <groupId>xerces</groupId>
-            <artifactId>xercesImpl</artifactId>
-            <version>2.10.0</version>
-        </dependency>
-        <!-- xml-apis has to be defined here since assembly chooses another version otherwise -->
-        <dependency>
-            <groupId>xml-apis</groupId>
-            <artifactId>xml-apis</artifactId>
-            <version>1.4.01</version>
-        </dependency>
+      <dependency>
+        <groupId>xerces</groupId>
+        <artifactId>xercesImpl</artifactId>
+        <version>2.10.0</version>
+      </dependency>
+      <!-- xml-apis has to be defined here since assembly chooses another version otherwise -->
+      <dependency>
+        <groupId>xml-apis</groupId>
+        <artifactId>xml-apis</artifactId>
+        <version>1.4.01</version>
+      </dependency>
+      <dependency>
+        <groupId>de.ingrid</groupId>
+        <artifactId>ingrid-version-management-pom</artifactId>
+        <version>3.6.0-SNAPSHOT</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
-
   <dependencies>
     <dependency>
       <groupId>de.ingrid</groupId>
       <artifactId>ingrid-iplug</artifactId>
-        <exclusions>
-          <exclusion>
-            <groupId>ant</groupId>
-            <artifactId>ant</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>opensymphony</groupId>
-            <artifactId>quartz</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>tomcat</groupId>
-            <artifactId>jasper-compiler</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>tomcat</groupId>
-            <artifactId>jasper-runtime</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>jetty</groupId>
-            <artifactId>servlet-api</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>jetty</groupId>
-            <artifactId>org.mortbay.jetty</artifactId>
-          </exclusion>
-        </exclusions>
-<!--       <exclusions> -->
-<!--         <exclusion> -->
-<!--           <groupId>axis</groupId> -->
-<!--           <artifactId>axis</artifactId> -->
-<!--         </exclusion> -->
-<!--         <exclusion> -->
-<!--           <groupId>commons-betwixt</groupId> -->
-<!--           <artifactId>commons-betwixt</artifactId> -->
-<!--         </exclusion> -->
-<!--         <exclusion> -->
-<!--           <groupId>xerces</groupId> -->
-<!--           <artifactId>xercesImpl</artifactId> -->
-<!--         </exclusion> -->
-<!--         <exclusion> -->
-<!--           <groupId>xml-apis</groupId> -->
-<!--           <artifactId>xml-apis</artifactId> -->
-<!--         </exclusion> -->
-<!--         <exclusion> -->
-<!--           <groupId>uba</groupId> -->
-<!--           <artifactId>xtmStubs</artifactId> -->
-<!--         </exclusion> -->
-<!--       </exclusions> -->
+      <exclusions>
+        <exclusion>
+          <groupId>ant</groupId>
+          <artifactId>ant</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>opensymphony</groupId>
+          <artifactId>quartz</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>tomcat</groupId>
+          <artifactId>jasper-compiler</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>tomcat</groupId>
+          <artifactId>jasper-runtime</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>jetty</groupId>
+          <artifactId>servlet-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>jetty</groupId>
+          <artifactId>org.mortbay.jetty</artifactId>
+        </exclusion>
+      </exclusions>
+      <!--       <exclusions>-->
+      <!--         <exclusion>-->
+      <!--           <groupId>axis</groupId>-->
+      <!--           <artifactId>axis</artifactId>-->
+      <!--         </exclusion>-->
+      <!--         <exclusion>-->
+      <!--           <groupId>commons-betwixt</groupId>-->
+      <!--           <artifactId>commons-betwixt</artifactId>-->
+      <!--         </exclusion>-->
+      <!--         <exclusion>-->
+      <!--           <groupId>xerces</groupId>-->
+      <!--           <artifactId>xercesImpl</artifactId>-->
+      <!--         </exclusion>-->
+      <!--         <exclusion>-->
+      <!--           <groupId>xml-apis</groupId>-->
+      <!--           <artifactId>xml-apis</artifactId>-->
+      <!--         </exclusion>-->
+      <!--         <exclusion>-->
+      <!--           <groupId>uba</groupId>-->
+      <!--           <artifactId>xtmStubs</artifactId>-->
+      <!--         </exclusion>-->
+      <!--       </exclusions>-->
     </dependency>
     <dependency>
       <groupId>de.ingrid</groupId>
@@ -195,12 +200,12 @@
       <scope>runtime</scope>
     </dependency>
     <dependency>
-        <groupId>xerces</groupId>
-        <artifactId>xercesImpl</artifactId>
+      <groupId>xerces</groupId>
+      <artifactId>xercesImpl</artifactId>
     </dependency>
     <dependency>
-        <groupId>xml-apis</groupId>
-        <artifactId>xml-apis</artifactId>
+      <groupId>xml-apis</groupId>
+      <artifactId>xml-apis</artifactId>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -268,15 +273,24 @@
       </plugin>
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
-            <!-- Add Type of Component to Manifest of Installer for Upgrade Server -->
-            <configuration>
-                <archive>
-                  <manifestEntries>
-                      <ingridComponentType>IPLUG_MANAGEMENT</ingridComponentType>
-                </manifestEntries>
-                </archive>
-            </configuration>
+        <!-- Add Type of Component to Manifest of Installer for Upgrade Server -->
+        <configuration>
+          <archive>
+            <manifestEntries>
+              <ingridComponentType>IPLUG_MANAGEMENT</ingridComponentType>
+            </manifestEntries>
+          </archive>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-installer</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
- </project>
+</project>
