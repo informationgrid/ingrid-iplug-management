@@ -185,7 +185,7 @@ public class ManagementIPlug extends HeartBeatPlug {
                     // TODO: use caching?
                     List<CodeList> modifiedCodelists = codeListService.updateFromServer(extractLastModifiedTimestamp(query));
                     hitsTemp = new IngridHit[1];
-                    IngridHit hit = new IngridHit(this.fPlugId, 0, 0, 1.0f);
+                    IngridHit hit = new IngridHit(this.fPlugId, "0", 0, 1.0f);
                     hitsTemp[0] = hit;
                     if (modifiedCodelists != null) {
                         hitsTemp[0].put("codelists", CodeListUtils.getXmlFromObject(modifiedCodelists));

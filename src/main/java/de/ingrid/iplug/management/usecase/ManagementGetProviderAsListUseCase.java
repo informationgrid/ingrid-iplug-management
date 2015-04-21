@@ -95,7 +95,7 @@ public class ManagementGetProviderAsListUseCase implements ManagementUseCase {
             providerList.add(providerHash);
         }
 
-        IngridHit hit = new IngridHit(plugId, 0, 0, 1.0f);
+        IngridHit hit = new IngridHit(plugId, "0", 0, 1.0f);
         hit.put("provider", providerList);
         result = new IngridHit[1];
         result[0] = hit;

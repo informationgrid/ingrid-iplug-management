@@ -67,7 +67,7 @@ public class ManagementDummyAuthenticationUseCase implements ManagementUseCase {
             PasswordCredentialProvider pc = ch.getPCProvider();
             CredentialPasswordEncoder cpe = pc.getEncoder();
 
-            hit = new IngridHit(plugId, 0, 0, 1.0f);
+            hit = new IngridHit(plugId, "0", 0, 1.0f);
             if (login.equalsIgnoreCase("admin_partner") && digest.equals(cpe.encode("admin_partner", "admin"))) {
                 // build return value
                 result = new IngridHit[1];
@@ -106,7 +106,7 @@ public class ManagementDummyAuthenticationUseCase implements ManagementUseCase {
                 hit.setArray("provider", new String[] { "bu_bmu", "bu_uba", "he_hmulv" });
                 result[0] = hit;
 
-                hit = new IngridHit(plugId, 0, 0, 1.0f);
+                hit = new IngridHit(plugId, "0", 0, 1.0f);
                 // hit authenticated
                 hit.putBoolean("authenticated", true);
                 // hits role

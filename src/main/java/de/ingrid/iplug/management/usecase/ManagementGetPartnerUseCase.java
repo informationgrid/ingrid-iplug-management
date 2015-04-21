@@ -124,7 +124,7 @@ public class ManagementGetPartnerUseCase implements ManagementUseCase {
             partnerList.add(partnerHash);
         }
 
-        IngridHit hit = new IngridHit(plugId, 0, 0, 1.0f);
+        IngridHit hit = new IngridHit(plugId, "0", 0, 1.0f);
         hit.put("partner", partnerList);
         result = new IngridHit[1];
         result[0] = hit;
