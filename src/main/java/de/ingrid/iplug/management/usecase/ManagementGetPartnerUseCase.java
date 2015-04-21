@@ -28,6 +28,8 @@ package de.ingrid.iplug.management.usecase;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -69,28 +71,29 @@ public class ManagementGetPartnerUseCase implements ManagementUseCase {
     public IngridHit[] execute(IngridQuery query, int start, int length, String plugId) {
 
         IngridHit[] result = null;
-        ArrayList partnerList = new ArrayList();
+        List<Map<String, Object>> partnerList = new ArrayList<Map<String, Object>>();
 
         Criteria queryCriteria = new Criteria();
         QueryByCriteria q = QueryFactory.newQuery(IngridPartner.class, queryCriteria);
         q.addOrderByAscending("sortkey");
 
-        Iterator partners = broker.getIteratorByQuery(q);
+        @SuppressWarnings("unchecked")
+        Iterator<IngridPartner> partners = broker.getIteratorByQuery(q);
         while (partners.hasNext()) {
-            IngridPartner partner = (IngridPartner) partners.next();
+            IngridPartner partner = partners.next();
 
             if (log.isDebugEnabled()) {
                 log.debug("Partner: " + partner.getIdent() + ":" + partner.getName());
             }
 
             // create a partner hash for each partner
-            HashMap partnerHash = new HashMap();
+            Map<String, Object> partnerHash = new HashMap<String, Object>();
             // add the partner id to the partnerhash
             partnerHash.put("partnerid", partner.getIdent());
             partnerHash.put("name", partner.getName());
 
             // get providers
-            ArrayList providerList = new ArrayList();
+            List<Map<String, Object>> providerList = new ArrayList<Map<String, Object>>();
             Criteria queryCriteriaProvider = new Criteria();
             if (partner.getIdent().equals("bund")) {
                 queryCriteriaProvider.addLike("ident", "bu_%");
@@ -99,16 +102,17 @@ public class ManagementGetPartnerUseCase implements ManagementUseCase {
             }
             QueryByCriteria qProvider = QueryFactory.newQuery(IngridProvider.class, queryCriteriaProvider);
             qProvider.addOrderByAscending("sortkey");
-            Iterator providers = broker.getIteratorByQuery(qProvider);
+            @SuppressWarnings("unchecked")
+            Iterator<IngridProvider> providers = broker.getIteratorByQuery(qProvider);
 
             while (providers.hasNext()) {
-                IngridProvider provider = (IngridProvider) providers.next();
+                IngridProvider provider = providers.next();
 
                 if (log.isDebugEnabled()) {
                     log.debug("Provider: " + provider.getIdent() + ":" + provider.getName());
                 }
 
-                HashMap providerHash = new HashMap();
+                Map<String, Object> providerHash = new HashMap<String, Object>();
                 providerHash.put("providerid", provider.getIdent());
                 providerHash.put("name", provider.getName());
                 providerHash.put("url", provider.getUrl());
@@ -120,7 +124,7 @@ public class ManagementGetPartnerUseCase implements ManagementUseCase {
             partnerList.add(partnerHash);
         }
 
-        IngridHit hit = new IngridHit(plugId, 0, 0, 1.0f);
+        IngridHit hit = new IngridHit(plugId, "0", 0, 1.0f);
         hit.put("partner", partnerList);
         result = new IngridHit[1];
         result[0] = hit;

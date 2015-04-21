@@ -28,6 +28,8 @@ package de.ingrid.iplug.management.usecase;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -69,22 +71,23 @@ public class ManagementGetProviderAsListUseCase implements ManagementUseCase {
     public IngridHit[] execute(IngridQuery query, int start, int length, String plugId) {
 
         IngridHit[] result = null;
-        ArrayList providerList = new ArrayList();
+        List<Map<String, Object>> providerList = new ArrayList<Map<String, Object>>();
 
         Criteria queryCriteria = new Criteria();
         QueryByCriteria q = QueryFactory.newQuery(IngridProvider.class, queryCriteria);
         q.addOrderByAscending("sortkey");
         q.addOrderByAscending("sortkey");
 
-        Iterator providers = broker.getIteratorByQuery(q);
+        @SuppressWarnings("unchecked")
+        Iterator<IngridProvider> providers = broker.getIteratorByQuery(q);
         while (providers.hasNext()) {
-            IngridProvider provider = (IngridProvider) providers.next();
+            IngridProvider provider = providers.next();
 
             if (log.isDebugEnabled()) {
                 log.debug("Provider: " + provider.getIdent() + ":" + provider.getName());
             }
 
-            HashMap providerHash = new HashMap();
+            Map<String, Object> providerHash = new HashMap<String, Object>();
             providerHash.put("providerid", provider.getIdent());
             providerHash.put("name", provider.getName());
             providerHash.put("url", provider.getUrl());
@@ -92,7 +95,7 @@ public class ManagementGetProviderAsListUseCase implements ManagementUseCase {
             providerList.add(providerHash);
         }
 
-        IngridHit hit = new IngridHit(plugId, 0, 0, 1.0f);
+        IngridHit hit = new IngridHit(plugId, "0", 0, 1.0f);
         hit.put("provider", providerList);
         result = new IngridHit[1];
         result[0] = hit;
