@@ -36,7 +36,7 @@ using the MetadataManager.
         default-connection="true"
         batch-mode="false"
      >
-	--><jdbc-connection-descriptor dbalias="//localhost/ingrid-portal" default-connection="true" driver="com.mysql.jdbc.Driver" jcd-alias="databaseMySQL" jdbc-level="2.0" password="" platform="MySQL" protocol="jdbc" subprotocol="mysql" useAutoCommit="1" username="root">
+	--><jdbc-connection-descriptor dbalias="//localhost/ingrid_portal" default-connection="true" driver="com.mysql.jdbc.Driver" jcd-alias="databaseMySQL" jdbc-level="2.0" password="" platform="MySQL" protocol="jdbc" subprotocol="mysql" useAutoCommit="1" username="root">
 	<connection-pool maxActive="21" maxIdle="-1" maxWait="2000" minEvictableIdleTimeMillis="60000" minIdle="0" numTestsPerEvictionRun="21" removeAbandoned="true" removeAbandonedTimeout="120000" testOnBorrow="true" testOnReturn="true" testWhileIdle="true" timeBetweenEvictionRunsMillis="120000" validationQuery="SELECT 1" whenExhaustedAction="2"/>
         <sequence-manager className="org.apache.ojb.broker.util.sequence.SequenceManagerHighLowImpl">
             <attribute attribute-name="grabSize" attribute-value="20"/>
