@@ -25,13 +25,13 @@
  */
 package de.ingrid.iplug.management;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import junit.framework.TestCase;
 import de.ingrid.utils.IngridHit;
 import de.ingrid.utils.IngridHits;
 import de.ingrid.utils.query.IngridQuery;
 import de.ingrid.utils.queryparser.QueryStringParser;
+import junit.framework.TestCase;
 
 public class ManagementIPlugGetPartnerTestLocal extends TestCase {
 
@@ -40,6 +40,7 @@ public class ManagementIPlugGetPartnerTestLocal extends TestCase {
      * 'de.ingrid.iplug.management.ManagementIPlug.search(IngridQuery, int,
      * int)'
      */
+    @SuppressWarnings("unchecked")
     public void testSearch() throws Exception {
 
         ManagementIPlug iplug = new ManagementIPlug();
@@ -47,7 +48,7 @@ public class ManagementIPlugGetPartnerTestLocal extends TestCase {
         IngridQuery q = QueryStringParser.parse("datatype:management management_request_type:1");
         IngridHits hits = iplug.search(q, 0, 1);
         IngridHit hit = hits.getHits()[0];
-        ArrayList partners = hit.getArrayList("partner");
+        List<String> partners = hit.getArrayList("partner");
         assertEquals(partners.size() > 0, true);
 
     }

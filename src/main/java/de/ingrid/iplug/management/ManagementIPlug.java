@@ -25,7 +25,6 @@
  */
 package de.ingrid.iplug.management;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -80,27 +79,13 @@ public class ManagementIPlug extends HeartBeatPlug {
     private PlugDescription fPlugDesc = null;
 
     /**
-     * Workingdirectory of the iPlug instance as absolute path
-     */
-    private String fWorkingDir = ".";
-
-    /**
      * Unique Plug-iD
      */
     private String fPlugId = null;
 
-    /**
-     * Time out for request
-     */
-    private int fTimeOut = 5000;
-
-    private String fLanguage = null;
-    
     // injected by Spring
     @Autowired
     private CodeListService codeListService;
-
-    private static final long serialVersionUID = ManagementIPlug.class.getName().hashCode();
 
     private static final int MANAGEMENT_AUTHENTICATE = 0;
 
@@ -133,12 +118,6 @@ public class ManagementIPlug extends HeartBeatPlug {
 
         this.fPlugDesc = plugDescription;
         this.fPlugId = fPlugDesc.getPlugId();
-        try {
-            this.fWorkingDir = fPlugDesc.getWorkinDirectory().getCanonicalPath();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
     }
 
     /**
