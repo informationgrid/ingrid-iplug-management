@@ -45,9 +45,14 @@
             <filtered>true</filtered>
         </fileSet>
         <fileSet>
-            <directory>target/installer</directory>
-            <outputDirectory>/</outputDirectory>
-        </fileSet>
+      		<directory>target/installer</directory>
+      		<outputDirectory>/</outputDirectory>
+    	</fileSet>
+    	<fileSet>
+      		<directory>target/installer/resources/scripts</directory>
+   			<outputDirectory>${project.artifactId}-${project.version}/</outputDirectory>
+      		<lineEnding>unix</lineEnding>
+    	</fileSet>
         <fileSet>
             <directory>src/main/webapp</directory>
             <outputDirectory>${project.artifactId}-${project.version}/webapp
