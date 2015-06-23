@@ -128,9 +128,9 @@ Weiteres Vorgehen
 Gehen Sie ins Verzeichnis:
 ${installDir}
 und rufen sie von der Kommandozeile folgendes auf
-"sh start.sh start", um im Webbrowser das iPlug unter
-der folgenden Adresse "http://localhost:8082", 
-um das iPlug zu starten und zu konfigurieren. 
+"sh start.sh start", um im Webbrowser die Komponente unter
+der folgenden Adresse "http://localhost:${localServerPort}", 
+zu konfigurieren.
 Anstelle von localhost koennen Sie
 auch die IP-Adresse des Computers eingeben!
 Bitte lesen Sie bzgl. der Administration die Kapitel unter
