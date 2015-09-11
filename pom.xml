@@ -3,13 +3,13 @@
   <parent>
     <artifactId>ingrid-releases-pom</artifactId>
     <groupId>de.ingrid</groupId>
-    <version>3.6.0</version>
+    <version>3.6.0.3</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.ingrid</groupId>
   <artifactId>ingrid-iplug-management</artifactId>
   <packaging>jar</packaging>
-  <version>3.6.1-SNAPSHOT</version>
+  <version>3.6.0.3</version>
   <name>InGrid iPlug-Management</name>
   <scm>
     <connection>scm:git:git@github.com:informationgrid/ingrid-iplug-management.git</connection>
@@ -129,7 +129,7 @@
     <dependency>
       <groupId>de.ingrid</groupId>
       <artifactId>ingrid-base-webapp</artifactId>
-      <version>3.6.0</version>
+      <version>3.6.0.3</version>
       <exclusions>
         <exclusion>
           <groupId>org.elasticsearch</groupId>
@@ -140,7 +140,7 @@
     <dependency>
       <groupId>de.ingrid</groupId>
       <artifactId>ingrid-base-webapp</artifactId>
-      <version>3.6.0</version>
+      <version>3.6.0.3</version>
       <classifier>res</classifier>
       <type>zip</type>
       <exclusions>
@@ -309,6 +309,15 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>external.atlassian.jgitflow</groupId>
+        <artifactId>jgitflow-maven-plugin</artifactId>
+        <version>1.0-m5.1</version>
+        <configuration>
+          <defaultOriginUrl>https://github.com/informationgrid/ingrid-iplug-management</defaultOriginUrl>
+          <noDeploy>true</noDeploy>
+        </configuration>
       </plugin>
     </plugins>
   </build>
