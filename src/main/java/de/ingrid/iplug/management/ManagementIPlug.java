@@ -46,6 +46,8 @@ import de.ingrid.iplug.management.usecase.ManagementGetPartnerUseCase;
 import de.ingrid.iplug.management.usecase.ManagementGetProviderAsListUseCase;
 import de.ingrid.iplug.management.usecase.ManagementUseCase;
 import de.ingrid.iplug.management.util.ManagementUtils;
+import de.ingrid.utils.IngridCall;
+import de.ingrid.utils.IngridDocument;
 import de.ingrid.utils.IngridHit;
 import de.ingrid.utils.IngridHitDetail;
 import de.ingrid.utils.IngridHits;
@@ -260,5 +262,10 @@ public class ManagementIPlug extends HeartBeatPlug {
     public static void main(String[] args) throws Exception {
         conf = new ConfigBuilder<Configuration>(Configuration.class).withCommandLineArgs(args).build();
         new JettyStarter( conf );
+    }
+
+    @Override
+    public IngridDocument call(IngridCall targetInfo) throws Exception {
+        throw new RuntimeException( "call-function not implemented in Management-iPlug" );
     }
 }
