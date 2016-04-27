@@ -74,7 +74,7 @@ using the MetadataManager.
            driver="com.mysql.jdbc.Driver"
            protocol="jdbc"
            subprotocol="mysql"
-           dbalias="//localhost/ingrid-portal"
+           dbalias="//localhost/ingrid_portal"
            username="dbUsername"
            password="dbPassword"
            useAutoCommit="1"
