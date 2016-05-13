@@ -77,7 +77,7 @@
         </target-select>
         <text property="dbUser" displayText="Benutzername:" defaultValue="root" />
         <text property="dbPassword" displayText="Benutzer-Passwort:" defaultValue="" />
-        <text property="dbAlias" displayText="Datenbank-Alias:" defaultValue="//localhost/ingrid-portal" />
+        <text property="dbAlias" displayText="Datenbank-Alias:" defaultValue="//localhost/ingrid_portal" />
         <comment bold="false" displayText="" explanatoryText="Diese Daten werden für den Zugriff auf die Portaldatenbank benötigt." />
     </page>
     

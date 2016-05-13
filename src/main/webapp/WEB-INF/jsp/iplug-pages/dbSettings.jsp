@@ -2,7 +2,7 @@
   **************************************************-
   Ingrid Management iPlug
   ==================================================
-  Copyright (C) 2014 - 2015 wemove digital solutions GmbH
+  Copyright (C) 2014 - 2016 wemove digital solutions GmbH
   ==================================================
   Licensed under the EUPL, Version 1.1 or – as soon they will be
   approved by the European Commission - subsequent versions of the
@@ -81,7 +81,7 @@
                         	<div class="input full">
                             	<form:input path="dbUrl" id="dbUrl" />
                             </div>
-                            <br /><span>Die Url zu der Datenbank, welches das Portal verwendet, z.B. '//localhost/ingrid-portal'.</span>
+                            <br /><span>Die Url zu der Datenbank, welches das Portal verwendet, z.B. '//localhost/ingrid_portal'.</span>
                             <form:errors path="dbUrl" cssClass="error" element="div" />
                         </td>
                     </tr>
