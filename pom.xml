@@ -3,13 +3,14 @@
   <parent>
     <artifactId>ingrid-releases-pom</artifactId>
     <groupId>de.ingrid</groupId>
-    <version>3.6.2</version>
+    <version>4.0.1</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>ingrid-iplug-management</artifactId>
   <packaging>jar</packaging>
-  <version>4.0.0</version>
+  <version>4.0.1</version>
   <name>InGrid iPlug-Management</name>
+  <description>This component is an interface to the portal database and the codelist repository.</description>
   <scm>
     <connection>scm:git:git@github.com:informationgrid/ingrid-iplug-management.git</connection>
     <developerConnection>scm:git:git@github.com:informationgrid/ingrid-iplug-management.git</developerConnection>
@@ -119,12 +120,12 @@
     <dependency>
       <groupId>de.ingrid</groupId>
       <artifactId>ingrid-utils</artifactId>
-      <version>3.6.2</version>
+      <version>4.0.1</version>
     </dependency>
     <dependency>
       <groupId>de.ingrid</groupId>
       <artifactId>ingrid-base-webapp</artifactId>
-      <version>3.6.2.1</version>
+      <version>4.0.1</version>
       <exclusions>
         <exclusion>
           <groupId>org.elasticsearch</groupId>
@@ -135,7 +136,7 @@
     <dependency>
       <groupId>de.ingrid</groupId>
       <artifactId>ingrid-base-webapp</artifactId>
-      <version>3.6.2.1</version>
+      <version>4.0.1</version>
       <classifier>res</classifier>
       <type>zip</type>
       <exclusions>
@@ -148,7 +149,7 @@
     <dependency>
       <groupId>de.ingrid</groupId>
       <artifactId>ingrid-codelist-service</artifactId>
-      <version>4.0.0</version>
+      <version>4.0.1</version>
       <exclusions>
         <exclusion>
           <groupId>opensymphony</groupId>
