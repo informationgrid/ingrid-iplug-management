@@ -29,6 +29,12 @@
   </properties>
   <body>
   
+    <release version="4.0.2-SNAPSHOT" date="??" description="??">
+      <action type="add" dev="wemove" issue="REDMINE-438">
+        Added sample configuration for PostgreSQL (including postgresql jdbc driver).
+      </action>
+    </release>
+
     <release version="4.0.1" date="2016-02-01" description="Release 4.0.1">
       <action type="fix" dev="wemove" issue="REDMINE-465">
         Fixed wrong path to save data when using cygwin.
