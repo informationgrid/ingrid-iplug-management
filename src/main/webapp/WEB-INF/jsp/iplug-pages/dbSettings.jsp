@@ -81,7 +81,7 @@
                         	<div class="input full">
                             	<form:input path="dbUrl" id="dbUrl" />
                             </div>
-                            <br /><span>Die Url zu der Datenbank, welches das Portal verwendet, z.B. für MySQL '//localhost/ingrid_portal' oder für Oracle 'thin:@//localhost:1521/XE'.</span>
+                            <br /><span>Die Url zu der Datenbank, welches das Portal verwendet, z.B. für MySQL '//localhost/ingrid_portal', für Oracle 'thin:@//localhost:1521/XE' oder für PostgreSQL '//localhost:5432/ingrid_portal'.</span>
                             <form:errors path="dbUrl" cssClass="error" element="div" />
                         </td>
                     </tr>

@@ -8,7 +8,7 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>ingrid-iplug-management</artifactId>
   <packaging>jar</packaging>
-  <version>4.0.1</version>
+  <version>4.0.2</version>
   <name>InGrid iPlug-Management</name>
   <description>This component is an interface to the portal database and the codelist repository.</description>
   <scm>
@@ -125,7 +125,7 @@
     <dependency>
       <groupId>de.ingrid</groupId>
       <artifactId>ingrid-base-webapp</artifactId>
-      <version>4.0.1</version>
+      <version>4.0.2</version>
       <exclusions>
         <exclusion>
           <groupId>org.elasticsearch</groupId>
@@ -136,7 +136,7 @@
     <dependency>
       <groupId>de.ingrid</groupId>
       <artifactId>ingrid-base-webapp</artifactId>
-      <version>4.0.1</version>
+      <version>4.0.2</version>
       <classifier>res</classifier>
       <type>zip</type>
       <exclusions>
@@ -195,6 +195,12 @@
       <groupId>ojdbc</groupId>
       <artifactId>ojdbc</artifactId>
       <version>14</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>9.4.1212</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>

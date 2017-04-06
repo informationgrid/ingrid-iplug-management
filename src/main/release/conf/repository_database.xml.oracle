@@ -43,6 +43,7 @@ using the MetadataManager.
         batch-mode="false"
      >
 	-->
+<!-- see https://db.apache.org/ojb/docu/guides/repository.html -->
 
     <jdbc-connection-descriptor
            jcd-alias="databaseOracle"
