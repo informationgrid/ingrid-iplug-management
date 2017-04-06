@@ -125,7 +125,7 @@
     <dependency>
       <groupId>de.ingrid</groupId>
       <artifactId>ingrid-base-webapp</artifactId>
-      <version>4.0.2-SNAPSHOT</version>
+      <version>4.0.2</version>
       <exclusions>
         <exclusion>
           <groupId>org.elasticsearch</groupId>
@@ -136,7 +136,7 @@
     <dependency>
       <groupId>de.ingrid</groupId>
       <artifactId>ingrid-base-webapp</artifactId>
-      <version>4.0.2-SNAPSHOT</version>
+      <version>4.0.2</version>
       <classifier>res</classifier>
       <type>zip</type>
       <exclusions>

@@ -29,9 +29,12 @@
   </properties>
   <body>
   
-    <release version="4.0.2-SNAPSHOT" date="??" description="??">
+    <release version="4.0.2" date="2017-04-06" description="Release 4.0.2">
       <action type="add" dev="wemove" issue="REDMINE-438">
         Added sample configuration for PostgreSQL (including postgresql jdbc driver).
+      </action>
+      <action type="fix" dev="wemove" issue="REDMINE-616">
+        Fixed handling of multiple values inside an index field on detail request.
       </action>
     </release>
 
