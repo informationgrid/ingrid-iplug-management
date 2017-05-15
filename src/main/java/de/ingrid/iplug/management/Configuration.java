@@ -22,10 +22,29 @@
  */
 package de.ingrid.iplug.management;
 
+import java.io.IOException;
 import java.util.Properties;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.ojb.broker.metadata.JdbcConnectionDescriptor;
+import org.apache.ojb.broker.metadata.MetadataManager;
+import org.springframework.core.io.ClassPathResource;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
 
 import com.tngtech.configbuilder.annotation.propertyloaderconfiguration.PropertiesFiles;
 import com.tngtech.configbuilder.annotation.propertyloaderconfiguration.PropertyLocations;
@@ -34,6 +53,7 @@ import com.tngtech.configbuilder.annotation.valueextractor.PropertyValue;
 
 import de.ingrid.admin.IConfig;
 import de.ingrid.admin.command.PlugdescriptionCommandObject;
+import de.ingrid.iplug.management.webapp.object.DbSettings;
 import de.ingrid.utils.PlugDescription;
 
 @PropertiesFiles({ "config" })
@@ -60,9 +80,26 @@ public class Configuration implements IConfig {
     @PropertyValue("codelist.defaultPersistency")
     @DefaultValue("-1")
     public int codelistDefaultPersistency;
+    
+    @PropertyValue("portal.db.url")
+    @DefaultValue("//localhost/ingrid_portal")
+    public String portalDbUrl;
+
+    @PropertyValue("portal.db.username")
+    public String portalDbUsername;
+
+    @PropertyValue("portal.db.password")
+    public String portalDbPassword;
 
     @Override
-    public void initialize() {}
+    public void initialize() {
+        if (portalDbUsername == null) {
+            mapParamsFromRepositoryFile();
+        } else {
+            saveChangesInFile();
+        }
+        
+    }
 
     @Override
     public void addPlugdescriptionValues(PlugdescriptionCommandObject pdObject) {
@@ -77,5 +114,56 @@ public class Configuration implements IConfig {
     }
 
     @Override
-    public void setPropertiesFromPlugdescription(Properties props, PlugdescriptionCommandObject pd) {}
+    public void setPropertiesFromPlugdescription(Properties props, PlugdescriptionCommandObject pd) {
+        props.setProperty( "portal.db.url", portalDbUrl);
+        props.setProperty( "portal.db.username", portalDbUsername);
+        props.setProperty( "portal.db.password", portalDbPassword);
+        
+        this.saveChangesInFile();
+    }
+    
+    private void saveChangesInFile() {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        try {
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            ClassPathResource input = new ClassPathResource("repository_database.xml");
+            Document document = builder.parse(input.getInputStream());
+            Element node = (Element)document.getElementsByTagName("jdbc-connection-descriptor").item(0);
+            node.setAttribute("dbalias", portalDbUrl);
+            node.setAttribute("username", portalDbUsername);
+            node.setAttribute("password", portalDbPassword);
+            
+            // write the content into xml file
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+            DOMSource source = new DOMSource(document);
+            StreamResult result = new StreamResult(input.getURI().getPath()); 
+            transformer.transform(source, result);
+            
+                        
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+    }
+    
+private void mapParamsFromRepositoryFile() {
+        
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        try {
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            ClassPathResource input = new ClassPathResource("repository_database.xml");
+            Document document = builder.parse(input.getInputStream());
+            Node node = document.getElementsByTagName("jdbc-connection-descriptor").item(0);
+            portalDbUrl = node.getAttributes().getNamedItem("dbalias").getTextContent();
+            portalDbUsername = node.getAttributes().getNamedItem("username").getTextContent();
+            portalDbPassword = node.getAttributes().getNamedItem("password").getTextContent();
+            
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 }

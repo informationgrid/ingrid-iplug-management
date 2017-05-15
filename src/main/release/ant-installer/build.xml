@@ -26,7 +26,7 @@
     </description>
     <!-- set global properties for this build -->
     <property name="iPlugName"          value="${project.artifactId}-${project.version}"/>
-    <property name="database-config"  value="${installDir}/conf/repository_database.xml"/>
+    <!-- <property name="database-config"  value="${installDir}/conf/repository_database.xml"/> -->
 	<property name="config"             value="${installDir}/conf/config.override.properties"/>
     
     <!-- THIS PORPERTIES ARE NECESSARY FOR UPDATES -->
@@ -83,17 +83,19 @@
     </target>
     
     <target name="database" description="Configure the database.">
-        <echo>Schreiben der DB-Konfiguration in Context-Dateien
+        <echo>Schreiben der DB-Konfiguration in Config-Datei
         </echo>
-        <xmlproperty file="${database-config}" prefix="dbXML"/>
-        <replace file="${database-config}" token="${dbXML.jdbc-connection-descriptor(username)}" value="${dbUser}"/>
-        <replace file="${database-config}" token="${dbXML.jdbc-connection-descriptor(password)}" value="${dbPassword}"/>
-        <replace file="${database-config}" token="${dbXML.jdbc-connection-descriptor(dbalias)}" value="${dbAlias}"/>
+        <touch file="${config}"/>
+        <propertyfile file="${config}">
+            <entry key="portal.db.url" value="${dbAlias}" />
+            <entry key="portal.db.username" value="${dbUser}" />
+            <entry key="portal.db.password" value="${dbPassword}" />
+        </propertyfile>
     </target>
 
     <target name="configureMySQL" description="Configure mySQL options."><!-- everything already set --></target>
 
-    <target name="configureOracle" description="Configure mySQL options.">
+    <target name="configureOracle" description="Configure oracle options.">
         <xmlproperty file="${database-config}" prefix="dbXML"/>
         <replace file="${database-config}" token="${dbXML.jdbc-connection-descriptor(jcd-alias)}" value="databaseOracle"/>
         <replace file="${database-config}" token="${dbXML.jdbc-connection-descriptor(platform)}" value="Oracle"/>
