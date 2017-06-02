@@ -1,5 +1,6 @@
 FROM openjdk:8-jdk-alpine
 ENV INGRID_USER=root
+ENV RUN_DIRECTLY=true
 
 ADD ingrid-iplug-management*-installer.jar /
 
@@ -15,4 +16,4 @@ RUN unzip ingrid-*.jar -d /tmp \
 WORKDIR /opt/ingrid/ingrid-iplug-management
 EXPOSE 9903
 
-CMD /bin/sh start.sh start && tail -f /dev/null
+CMD /bin/sh start.sh start
