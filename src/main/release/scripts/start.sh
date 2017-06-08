@@ -39,6 +39,11 @@ THIS_DIR=`dirname "$THIS"`
 INGRID_HOME=`cd "$THIS_DIR" ; pwd`
 PID=$INGRID_HOME/ingrid.pid
 
+#create directories
+if [ ! -e $INGRID_HOME/logs ]; then
+   mkdir $INGRID_HOME/logs;
+fi 
+
 # include default options, i.e. debug, jmx and jvm options
 if [ -f $INGRID_HOME/env.user.sh ]; then
   eval "`sh $INGRID_HOME/env.user.sh`"
