@@ -29,9 +29,12 @@
   </properties>
   <body>
   
-    <release version="4.0.3" date="2017-xx-xx" description="Release 4.0.3">
+    <release version="4.0.3" date="2017-06-13" description="Release 4.0.3">
       <action type="fix" dev="wemove" issue="REDMINE-705">
         Increased performance when getting codelists.
+      </action>
+      <action type="add" dev="wemove" issue="">
+        Prepare for docker deployment.
       </action>
     </release>
     
