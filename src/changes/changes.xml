@@ -29,6 +29,15 @@
   </properties>
   <body>
   
+    <release version="4.0.3" date="2017-06-13" description="Release 4.0.3">
+      <action type="fix" dev="wemove" issue="REDMINE-705">
+        Increased performance when getting codelists.
+      </action>
+      <action type="add" dev="wemove" issue="">
+        Prepare for docker deployment.
+      </action>
+    </release>
+    
     <release version="4.0.2" date="2017-04-06" description="Release 4.0.2">
       <action type="add" dev="wemove" issue="REDMINE-438">
         Added sample configuration for PostgreSQL (including postgresql jdbc driver).

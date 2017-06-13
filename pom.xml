@@ -3,12 +3,12 @@
   <parent>
     <artifactId>ingrid-releases-pom</artifactId>
     <groupId>de.ingrid</groupId>
-    <version>4.0.1</version>
+    <version>4.0.3</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>ingrid-iplug-management</artifactId>
   <packaging>jar</packaging>
-  <version>4.0.2</version>
+  <version>4.0.3</version>
   <name>InGrid iPlug-Management</name>
   <description>This component is an interface to the portal database and the codelist repository.</description>
   <scm>
@@ -115,7 +115,7 @@
     <dependency>
       <groupId>de.ingrid</groupId>
       <artifactId>ingrid-portal-utils</artifactId>
-      <version>3.5.0</version>
+      <version>3.6.1</version>
     </dependency>
     <dependency>
       <groupId>de.ingrid</groupId>
@@ -149,7 +149,7 @@
     <dependency>
       <groupId>de.ingrid</groupId>
       <artifactId>ingrid-codelist-service</artifactId>
-      <version>4.0.1</version>
+      <version>4.0.3</version>
       <exclusions>
         <exclusion>
           <groupId>opensymphony</groupId>
@@ -241,11 +241,6 @@
       <version>1.0</version>
     </dependency>
     <dependency>
-      <groupId>commons-httpclient</groupId>
-      <artifactId>commons-httpclient</artifactId>
-      <version>3.1</version>
-    </dependency>
-    <dependency>
       <groupId>commons-fileupload</groupId>
       <artifactId>commons-fileupload</artifactId>
       <version>1.2.2</version>
@@ -321,6 +316,12 @@
           <defaultOriginUrl>https://github.com/informationgrid/ingrid-iplug-management</defaultOriginUrl>
           <noDeploy>true</noDeploy>
         </configuration>
+      </plugin>
+      
+            <!-- Activate docker image build and push integration (see parent-pom) -->
+      <plugin>
+        <groupId>com.spotify</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
