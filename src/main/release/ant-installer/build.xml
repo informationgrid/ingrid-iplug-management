@@ -26,7 +26,7 @@
     </description>
     <!-- set global properties for this build -->
     <property name="iPlugName"          value="${project.artifactId}-${project.version}"/>
-    <!-- <property name="database-config"  value="${installDir}/conf/repository_database.xml"/> -->
+    <property name="database-config"  value="${installDir}/conf/repository_database.xml"/>
 	<property name="config"             value="${installDir}/conf/config.override.properties"/>
     
     <!-- THIS PORPERTIES ARE NECESSARY FOR UPDATES -->
@@ -96,18 +96,17 @@
         </propertyfile>
     </target>
 
-    <target name="configureMySQL" description="Configure mySQL options."><!-- everything already set --></target>
-
-    <target name="configureOracle" description="Configure oracle options.">
-        <xmlproperty file="${database-config}" prefix="dbXML"/>
-        <replace file="${database-config}" token="${dbXML.jdbc-connection-descriptor(jcd-alias)}" value="databaseOracle"/>
-        <replace file="${database-config}" token="${dbXML.jdbc-connection-descriptor(platform)}" value="Oracle"/>
-        <replace file="${database-config}" token="${dbXML.jdbc-connection-descriptor(driver)}" value="oracle.jdbc.OracleDriver"/>
-        <replace file="${database-config}" token="${dbXML.jdbc-connection-descriptor(subprotocol)}" value="oracle"/>
-        <replace file="${database-config}" token="${dbXML.jdbc-connection-descriptor(jdbc-level)}" value="3.0"/>
-        <replace file="${database-config}" token="${dbXML.jdbc-connection-descriptor.connection-pool(validationQuery)}" value="SELECT 1 FROM DUAL"/>
+    <target name="configureMySQL" description="Configure MySQL options.">
+    	<copy file="${database-config}.mysql" tofile="${database-config}"/>
     </target>
 
+    <target name="configureOracle" description="Configure Oracle options.">
+    	<copy file="${database-config}.oracle" tofile="${database-config}"/>
+    </target>
+
+	<target name="configurePostgres" description="Configure PostgreSQL options.">
+    	<copy file="${database-config}.postgres" tofile="${database-config}"/>
+    </target>
     
     <target name="codelist" description="Configure the spring file for codelist repository.">
         <echo>Schreiben der Codelist-Repository Informationen und den Port in configuration

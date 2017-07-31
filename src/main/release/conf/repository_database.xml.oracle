@@ -53,9 +53,9 @@ using the MetadataManager.
            driver="oracle.jdbc.OracleDriver"
            protocol="jdbc"
            subprotocol="oracle"
-           dbalias="thin:INGRID_PORTAL/INGRID_PORTAL@192.168.0.238:1521:XE"
+           dbalias="thin:@localhost:1521:XE"
            username="INGRID_PORTAL"
-           password="INGRID_PORTAL"
+           password="PWD"
            useAutoCommit="1"
      >
 	<connection-pool
