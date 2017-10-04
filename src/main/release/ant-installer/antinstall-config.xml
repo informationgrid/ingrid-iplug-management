@@ -66,7 +66,7 @@
         ifTarget    ="setInstallProperty"
         type        ="input" 
         name        ="mysqlOptions" 
-        displayText ="Einstellungen fuer die MySQL/ORACLE-Datenbank" 
+        displayText ="Einstellungen für die Datenbank" 
         target      ="database">
         <target-select
             property      ="dbChoice"
@@ -74,6 +74,7 @@
             defaultValue  ="true">
             <option value="configureMySQL" text="MySQL"/>
             <option value="configureOracle" text="Oracle"/>
+            <option value="configurePostgres" text="PostgreSQL"/>
         </target-select>
         <text property="dbUser" displayText="Benutzername:" defaultValue="root" />
         <text property="dbPassword" displayText="Benutzer-Passwort:" defaultValue="" />

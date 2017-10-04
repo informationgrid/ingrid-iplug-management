@@ -29,6 +29,18 @@
   </properties>
   <body>
   
+    <release version="4.1.0" date="2017-10-04" description="Release 4.1.0">
+      <action type="update" dev="wemove" issue="563">
+        Added syslist 6010 accessConstraints to codelist service.
+      </action>
+      <action type="update" dev="wemove" issue="367">
+        Updated codelist entries to show which CRS is INSPIRE.
+      </action>
+      <action type="fix" dev="wemove" issue="777">
+        Integrated PostgreSQL into installer and fix update functionality.
+      </action>
+    </release>
+
     <release version="4.0.3" date="2017-06-13" description="Release 4.0.3">
       <action type="fix" dev="wemove" issue="REDMINE-705">
         Increased performance when getting codelists.
