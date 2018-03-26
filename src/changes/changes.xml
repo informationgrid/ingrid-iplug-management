@@ -29,6 +29,15 @@
   </properties>
   <body>
   
+    <release version="4.3.0" date="2018-03-26" description="Release 4.3.0">
+      <action type="update" dev="wemove">
+        Updated dependencies (current jars). Also commons-lang to avoid error during save.
+      </action>
+      <action type="update" dev="wemove" issue="4">
+        Integrated project ingrid-jetspeed-portal.
+      </action>
+    </release>
+
     <release version="4.1.0" date="2017-10-04" description="Release 4.1.0">
       <action type="update" dev="wemove" issue="563">
         Added syslist 6010 accessConstraints to codelist service.
