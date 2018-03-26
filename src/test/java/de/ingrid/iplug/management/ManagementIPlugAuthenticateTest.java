@@ -2,7 +2,7 @@
  * **************************************************-
  * Ingrid Management iPlug
  * ==================================================
- * Copyright (C) 2014 - 2017 wemove digital solutions GmbH
+ * Copyright (C) 2014 - 2018 wemove digital solutions GmbH
  * ==================================================
  * Licensed under the EUPL, Version 1.1 or – as soon they will be
  * approved by the European Commission - subsequent versions of the
@@ -52,10 +52,10 @@ public class ManagementIPlugAuthenticateTest extends TestCase {
         IngridQuery q = QueryStringParser.parse("datatype:management login:admin_partner digest:" + digest
                 + " management_request_type:815");
         IngridHits hits = iplug.search(q, 0, 100);
-        assertEquals(hits.length(), 1L);
+        assertEquals(1L, hits.length());
         IngridHit hit = hits.getHits()[0];
-        assertEquals(hit.getBoolean("authenticated"), true);
-        assertEquals((String) hit.get("permission"), "admin.portal.partner");
+        assertTrue( hit.getBoolean("authenticated") );
+        assertEquals("admin.portal.partner", (String) hit.get("permission"));
         String[] partner = new String[] { "he", "st" };
         for (int i = 0; i < partner.length; i++) {
             assertEquals(partner[i], (String) hit.getArray("partner")[i]);
@@ -68,8 +68,8 @@ public class ManagementIPlugAuthenticateTest extends TestCase {
         hits = iplug.search(q, 0, 100);
         assertEquals(hits.length(), 1L);
         hit = hits.getHits()[0];
-        assertEquals(hit.getBoolean("authenticated"), true);
-        assertEquals((String) hit.get("permission"), "admin.portal.partner.provider.index");
+        assertTrue(hit.getBoolean("authenticated"));
+        assertEquals("admin.portal.partner.provider.index", (String) hit.get("permission"));
         partner = new String[] { "bund" };
         for (int i = 0; i < partner.length; i++) {
             assertEquals(partner[i], (String) hit.getArray("partner")[i]);
