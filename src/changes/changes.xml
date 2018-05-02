@@ -29,6 +29,13 @@
   </properties>
   <body>
   
+    <release version="4.4.0" date="2018-xx-xx" description="Release 4.4.0">
+      <action type="fix" dev="wemove" issue="1073">
+        Fixed UTF-8 encoding for DB password in admin GUI.
+      </action>
+
+    </release>
+
     <release version="4.3.0" date="2018-03-26" description="Release 4.3.0">
       <action type="update" dev="wemove">
         Updated dependencies (current jars). Also commons-lang to avoid error during save.
