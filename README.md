@@ -1,3 +1,5 @@
+# DEPRECATED: This iPlug has been integrated into the iBus component.
+
 Management iPlug
 ========
 
